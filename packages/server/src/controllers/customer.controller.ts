@@ -1,5 +1,5 @@
 import { ZodError, z } from 'zod'
-import { CustomerAlreadyExists } from '../use-cases/errors/city-alredy-exists'
+import { CustomerAlreadyExists } from '../use-cases/errors/customer-already-exists'
 import { makeCreateCustomerUseCase } from '../use-cases/factories/make-create-customer.use-case'
 import { makeListCustomerUseCase } from '../use-cases/factories/make-list-customer.use-case'
 import { Request, Response } from 'express'

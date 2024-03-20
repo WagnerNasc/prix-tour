@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import routes from './routes'
 import { ZodError } from 'zod'
 import cors from 'cors'
@@ -12,6 +12,14 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 app.use(routes)
+
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  if (!req.route) {
+    res.status(404).json({ message: 'Route not found.' })
+    return
+  }
+  next()
+})
 
 // TODO: adjust middleware
 app.use((error: unknown, _req: Request, res: Response) => {

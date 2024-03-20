@@ -12,7 +12,7 @@ export class CustomerRepository implements ICustomerRepository {
   async findByEmail(email: string): Promise<Customer | null> {
     try {
       const queryResult = await this.pool.query(
-        `SELECT * FROM customers WHERE email = $1`,
+        /* sql */ `SELECT * FROM customer WHERE email = $1`,
         [email],
       )
 
@@ -36,18 +36,18 @@ export class CustomerRepository implements ICustomerRepository {
     filter?: string,
   ): Promise<{ data: Customer[]; total: number }> {
     try {
-      let query = `
+      let query = /* sql */ `
         SELECT
           id,
           name,
           phone,
           email
         FROM
-          customers
+          customer
       `
 
       if (filter) {
-        query += `
+        query += /* sql */ `
           WHERE 
             (name ILIKE '%${filter}%' OR 
             email ILIKE '%${filter}%')
@@ -56,17 +56,17 @@ export class CustomerRepository implements ICustomerRepository {
 
       const offset = (page - 1) * 10
 
-      query += `
+      query += /* sql */ `
         ORDER BY created_at DESC
         LIMIT 10
         OFFSET ${offset}
       `
 
-      const countQuery = `
+      const countQuery = /* sql */ `
         SELECT 
           COUNT(*) as total 
         FROM 
-          customers
+          customer
         ${
           filter
             ? `
@@ -94,8 +94,8 @@ export class CustomerRepository implements ICustomerRepository {
   async create(customer: Customer): Promise<void> {
     try {
       const query = {
-        text: `
-          INSERT INTO customers (id, name, email, phone) 
+        text: /* sql */ `
+          INSERT INTO customer (id, name, email, phone) 
           VALUES ($1, $2, $3, $4)`,
         values: [customer.id, customer.name, customer.email, customer.phone],
       }
