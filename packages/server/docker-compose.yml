@@ -1,0 +1,15 @@
+# docker run --name prix-tour -e POSTGRES_USER=docker -e 
+# POSTGRES_PASSWORD=docker -e POSTGRES_DB=prix-tour -p 5432:5432 postgis/postgis
+
+version: '3'
+
+services:
+  prix-tour:
+    image: postgis/postgis
+    container_name: prix-tour
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: prix-tour
+    ports:
+      - "5432:5432"
