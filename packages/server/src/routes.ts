@@ -1,17 +1,27 @@
 import express from 'express'
-import { CustomerController } from './controllers/customer.controller'
+import { TouristAttractionsController } from './controllers/tourist-attractions.controller'
 
 const routes = express.Router()
 
-/* Customer */
-routes.get('/customers', CustomerController.listCustomers)
-routes.post('/customer', CustomerController.createCustomer)
+/* Tourist Attractions */
 
-/* Customer Address */
 routes.get(
-  '/customer-addresses',
-  CustomerController.listCustomerAddressesSorted,
+  '/tourist-attractions',
+  TouristAttractionsController.listTouristAttractions,
 )
-routes.post('/customer-address', CustomerController.createCustomerAddress)
+routes.get(
+  '/tourist-attractions/:id',
+  TouristAttractionsController.fetchTouristAttractionById,
+)
+routes.post(
+  '/tourist-attractions',
+  TouristAttractionsController.createTouristAttractions,
+)
+// routes.put('/tourist-attractions/:id', CustomerController.listCustomers)
+// routes.delete('/tourist-attractions/:id', CustomerController.listCustomers)
+
+/* City */
+
+routes.post('/cities', TouristAttractionsController.createCity)
 
 export default routes

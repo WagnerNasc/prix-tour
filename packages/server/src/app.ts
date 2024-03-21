@@ -11,6 +11,12 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 
+/* pre handler log */
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  console.log(`[${req.method}] ${req.url}`)
+  next()
+})
+
 app.use(routes)
 
 app.use(function (req: Request, res: Response, next: NextFunction) {
