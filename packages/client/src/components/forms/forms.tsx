@@ -1,19 +1,19 @@
-import { Field, Formik } from 'formik';
-import { formFields } from './data';
-import styled from 'styled-components';
+import { Field, Formik } from 'formik'
+import { formFields } from './data'
+import styled from 'styled-components'
 
 const FormSection = styled.div`
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-`;
+`
 
 const Input = styled.input`
   width: 100%;
   height: 2rem;
   padding-left: 0.5rem;
-`;
+`
 
 const Button = styled.button`
   border: none;
@@ -26,7 +26,7 @@ const Button = styled.button`
   &:hover {
     background-color: #3f414e;
   }
-`;
+`
 
 const Forms = () => (
   <FormSection>
@@ -41,9 +41,9 @@ const Forms = () => (
       }}
       onSubmit={(values, actions) => {
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
+          alert(JSON.stringify(values, null, 2))
+          actions.setSubmitting(false)
+        }, 1000)
       }}
     >
       {props => (
@@ -65,6 +65,6 @@ const Forms = () => (
       )}
     </Formik>
   </FormSection>
-);
+)
 
-export default Forms;
+export default Forms

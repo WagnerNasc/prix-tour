@@ -24,4 +24,4 @@ export const formFields = [
     label: 'Link da imagem',
     type: 'text',
   },
-];
+]

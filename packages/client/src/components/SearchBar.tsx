@@ -5,7 +5,7 @@ import {
   Grommet,
   ThemeType,
   Toolbar,
-} from 'grommet';
+} from 'grommet'
 
 const customTheme: ThemeType = {
   global: {
@@ -16,7 +16,7 @@ const customTheme: ThemeType = {
       },
     },
   },
-};
+}
 
 const SearchBar = () => {
   return (
@@ -28,7 +28,7 @@ const SearchBar = () => {
         <DataTable />
       </Data>
     </Grommet>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar

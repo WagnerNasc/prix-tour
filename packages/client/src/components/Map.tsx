@@ -1,23 +1,24 @@
-import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
-import { useMemo } from 'react';
-import styled from 'styled-components';
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api'
+import { useMemo } from 'react'
+import styled from 'styled-components'
+import Skeleton from './Loading'
 
 const Map = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_API_KEY,
-  });
-  const center = useMemo(() => ({ lat: 43.194019, lng: -80.384499 }), []);
+  })
+  const center = useMemo(() => ({ lat: 43.194019, lng: -80.384499 }), [])
 
   const MapContainer = styled.div`
     height: 80vh;
     width: 90vw;
     margin: 0 auto;
-  `;
+  `
 
   return (
     <MapContainer>
       {!isLoaded ? (
-        <h1>Loading...</h1>
+        <Skeleton size="100%" />
       ) : (
         <GoogleMap
           mapContainerStyle={{ width: '100%', height: '100%' }}
@@ -28,7 +29,7 @@ const Map = () => {
         </GoogleMap>
       )}
     </MapContainer>
-  );
-};
+  )
+}
 
-export default Map;
+export default Map

@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
-import styled from 'styled-components';
-import { useOnClickOutside } from '../utils/hooks/onClickOutside';
+import { useRef, useState } from 'react'
+import styled from 'styled-components'
+import { useOnClickOutside } from '../utils/hooks/onClickOutside'
 
 const SideBarContainer = styled.div<{ $show?: boolean }>`
   position: fixed;
@@ -13,7 +13,7 @@ const SideBarContainer = styled.div<{ $show?: boolean }>`
   transition: transform 0.3s ease-in-out;
   padding: 2rem;
   z-index: 10;
-`;
+`
 
 const Button = styled.button`
   position: absolute;
@@ -21,14 +21,14 @@ const Button = styled.button`
   right: 10px;
   width: 100px;
   height: 50px;
-`;
+`
 
 const SideBar = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null)
 
-  useOnClickOutside(ref, () => setShow(false));
+  useOnClickOutside(ref, () => setShow(false))
 
   return (
     <>
@@ -44,7 +44,7 @@ const SideBar = () => {
         {show ? 'Hide' : 'Show'} Detalhes
       </Button>
     </>
-  );
-};
+  )
+}
 
-export default SideBar;
+export default SideBar

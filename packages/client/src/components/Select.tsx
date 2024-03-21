@@ -1,8 +1,8 @@
-import { Select } from 'grommet';
-import React from 'react';
+import { Select } from 'grommet'
+import React from 'react'
 
 const SelectFilter = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState('')
 
   return (
     <Select
@@ -11,7 +11,7 @@ const SelectFilter = () => {
       placeholder={'Filtrar por'}
       onChange={({ option }) => setValue(option)}
     />
-  );
-};
+  )
+}
 
-export default SelectFilter;
+export default SelectFilter
