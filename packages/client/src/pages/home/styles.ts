@@ -4,6 +4,7 @@ import logo from '../../assets/logo.png'
 export const Header = styled.header`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: space-around;
 `
 
