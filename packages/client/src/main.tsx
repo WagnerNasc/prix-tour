@@ -8,7 +8,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="invoices" element={<Invoices />} /> */}
       </Routes>
     </BrowserRouter>
     ,
