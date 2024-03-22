@@ -1,15 +1,12 @@
 import { ITouristAttractionRepository } from '@/repositories/interfaces/tourist-attraction-repository-interface'
-import { TouristAttraction } from '../interfaces/tourist-attraction-interface'
 import { TouristAttractionNotFound } from '../errors'
 
-export class FetchTouristAttractionsUseCase {
+export class InvalidTouristAttractionsUseCase {
   constructor(
     private touristAttractionRepository: ITouristAttractionRepository,
   ) {}
 
-  public async execute(id: string): Promise<{
-    data: TouristAttraction
-  }> {
+  public async execute(id: string): Promise<void> {
     const touristAttraction =
       await this.touristAttractionRepository.findById(id)
 
@@ -17,6 +14,6 @@ export class FetchTouristAttractionsUseCase {
       throw new TouristAttractionNotFound()
     }
 
-    return touristAttraction
+    await this.touristAttractionRepository.delete(touristAttraction.data)
   }
 }

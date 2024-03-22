@@ -3,7 +3,7 @@ import { randomUUID as uuid } from 'crypto'
 import { TouristAttraction } from '@/use-cases/interfaces/tourist-attraction-interface'
 import { ICityRepository } from '@/repositories/interfaces/city-repository-interface'
 import { ITouristAttractionRepository } from '@/repositories/interfaces/tourist-attraction-repository-interface'
-import { CityNotFound } from '../errors/city-not-found'
+import { CityNotFound } from '../errors'
 
 export class CreateTouristAttractionUseCase {
   constructor(

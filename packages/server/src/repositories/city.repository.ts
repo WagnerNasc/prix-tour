@@ -12,7 +12,13 @@ export class CityRepository implements ICityRepository {
   async findById(id: string): Promise<City | null> {
     try {
       const queryResult = await this.pool.query(
-        /* sql */ `SELECT * FROM city WHERE id = $1`,
+        /* sql */ `
+          SELECT 
+            * 
+          FROM 
+            city 
+          WHERE id = $1 AND   
+          deleted_at IS NULL`,
         [id],
       )
 

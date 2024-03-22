@@ -11,14 +11,20 @@ routes.get(
 )
 routes.get(
   '/tourist-attractions/:id',
-  TouristAttractionsController.fetchTouristAttractionById,
+  TouristAttractionsController.fetchTouristAttraction,
 )
 routes.post(
   '/tourist-attractions',
-  TouristAttractionsController.createTouristAttractions,
+  TouristAttractionsController.createTouristAttraction,
 )
-// routes.put('/tourist-attractions/:id', CustomerController.listCustomers)
-// routes.delete('/tourist-attractions/:id', CustomerController.listCustomers)
+routes.put(
+  '/tourist-attractions/:id',
+  TouristAttractionsController.updateTouristAttraction,
+)
+routes.delete(
+  '/tourist-attractions/:id',
+  TouristAttractionsController.invalidTouristAttraction,
+)
 
 /* City */
 
