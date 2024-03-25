@@ -12,7 +12,7 @@ export class UpdateTouristAttractionsUseCase {
   public async execute(
     touristAttraction: Optional<
       OmitProps<TouristAttraction, 'cityId' | 'latitude' | 'longitude'>,
-      'name'
+      'name' | 'imageLink'
     >,
   ): Promise<void> {
     const foundTouristAttraction =

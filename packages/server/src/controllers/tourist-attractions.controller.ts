@@ -1,7 +1,7 @@
 import { makeFetchTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-fetch-tourist-attraction'
 import {
+  CityNotFound,
   InternalServer,
-  TouristAttractionAlreadyExists,
   TouristAttractionNotFound,
 } from '@use-cases/errors'
 import { makeCreateCityUseCase } from '../use-cases/factories/city/make-create-city'
@@ -65,12 +65,12 @@ export class TouristAttractionsController {
       const updateTouristAttractionQuerySchema = z.object({
         name: z.string().optional(),
         description: z.string(),
+        imageLink: z.string().url().optional(),
       })
 
       const { id } = updateTouristAttractionParamsSchema.parse(req.params)
-      const { name, description } = updateTouristAttractionQuerySchema.parse(
-        req.query,
-      )
+      const { name, description, imageLink } =
+        updateTouristAttractionQuerySchema.parse(req.query)
       const updateTouristAttractionByIdUseCase =
         makeUpdateTouristAttractionUseCase()
 
@@ -78,6 +78,7 @@ export class TouristAttractionsController {
         id,
         name,
         description,
+        imageLink,
       })
 
       res.status(200).json({
@@ -128,9 +129,10 @@ export class TouristAttractionsController {
         longitude: z.coerce.number().refine((value) => {
           return Math.abs(value) <= 180
         }),
+        imageLink: z.string().url().optional(),
       })
 
-      const { name, description, cityId, latitude, longitude } =
+      const { name, description, cityId, latitude, longitude, imageLink } =
         createTouristAttractionBodySchema.parse(req.body)
 
       const createTouristAttractionsUseCase =
@@ -142,13 +144,14 @@ export class TouristAttractionsController {
         cityId,
         latitude,
         longitude,
+        imageLink,
       })
 
       res.status(200).json({
         message: 'created successfully.',
       })
     } catch (error) {
-      if (error instanceof TouristAttractionAlreadyExists) {
+      if (error instanceof CityNotFound) {
         return res.status(409).send({ message: error.message })
       }
 
@@ -157,6 +160,7 @@ export class TouristAttractionsController {
           .status(400)
           .json({ message: 'Validation error.', issues: error.issues })
       }
+      console.log(error)
 
       throw new InternalServer()
     }

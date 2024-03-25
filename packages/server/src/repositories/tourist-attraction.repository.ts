@@ -18,7 +18,13 @@ export class TouristAttractionRepository
       const queryResult = await this.pool.query(
         /* sql */ `
           SELECT 
-            * 
+            id,
+            name,
+            description,
+            image_link,
+            latitude,
+            longitude,
+            created_at
           FROM 
             tourist_attraction 
           WHERE id = $1 AND   
@@ -52,8 +58,10 @@ export class TouristAttractionRepository
           id,
           name,
           description,
+          image_link,
           latitude,
-          longitude
+          longitude,
+          created_at
         FROM
           tourist_attraction
       `
@@ -147,13 +155,14 @@ export class TouristAttractionRepository
     try {
       const query = {
         text: /* sql */ `
-          INSERT INTO tourist_attraction (id, name, description, cityId, latitude, longitude) 
-          VALUES ($1, $2, $3, $4, $5, $6)`,
+          INSERT INTO tourist_attraction (id, name, description, city_id, image_link, latitude, longitude) 
+          VALUES ($1, $2, $3, $4, $5, $6, $7)`,
         values: [
           touristAttraction.id,
           touristAttraction.name,
           touristAttraction.description,
           touristAttraction.cityId,
+          touristAttraction.imageLink ?? '',
           touristAttraction.latitude.toString(),
           touristAttraction.longitude.toString(),
         ],

@@ -1,4 +1,7 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
     "target": "es2020",
     "module": "commonjs",
@@ -10,11 +13,10 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
+      "@*": ["src/*"],
       "@infra/*": ["src/infra/*"],
-      "@helpers/*": ["src/helpers/*"],
       "@repositories/*": ["src/repositories/*"],
-      "@use-cases/*": ["src/use-cases/*"],
-      "@test/*": ["src/test/*"]
+      "@use-cases/*": ["src/use-cases/*"]
     }
   }
 }

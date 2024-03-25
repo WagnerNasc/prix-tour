@@ -12,7 +12,7 @@ export interface ITouristAttractionRepository {
   update(
     TouristAttraction: Optional<
       OmitProps<TouristAttraction, 'cityId' | 'latitude' | 'longitude'>,
-      'name'
+      'name' | 'imageLink'
     >,
   ): Promise<void>
   create(TouristAttraction: TouristAttraction): Promise<void>
