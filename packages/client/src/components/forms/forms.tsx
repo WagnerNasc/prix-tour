@@ -13,6 +13,11 @@ const FormSection = styled.div`
   width: 100%;
 `
 
+const Title = styled.h2`
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+`
+
 const FieldDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,6 +27,8 @@ const FieldDiv = styled.div`
 const Input = styled.input`
   height: 2rem;
   padding-left: 0.5rem;
+  font-size: 1rem;
+  font-weight: 400;
 `
 
 const ErrorDiv = styled.div`
@@ -33,10 +40,13 @@ const ErrorDiv = styled.div`
 const Button = styled.button`
   border: none;
   padding: 1rem;
-  background-color: #31363f;
+  background-color: #363636;
   color: white;
   border-radius: 5px;
   width: 5vw;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
 
   &:hover {
     background-color: #3f414e;
@@ -57,7 +67,7 @@ const validateForm = (values: FormValues) => {
 
 const Forms = () => (
   <FormSection>
-    <h2>Crie uma atração</h2>
+    <Title>Crie uma atração</Title>
     <Formik
       initialValues={{
         name: '',

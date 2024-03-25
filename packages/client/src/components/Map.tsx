@@ -11,6 +11,7 @@ const MapComponent = () => {
   const extractPoints = async () => {
     const pointsGet = await getAllAttractions()
     const spacial = pointsGet?.map((point: LocationsData) => ({
+      ...point,
       lat: Number(point.latitude),
       lng: Number(point.longitude),
       key: point.id.toString(),
@@ -26,8 +27,6 @@ const MapComponent = () => {
 
   const MapContainer = styled.div`
     height: 80vh;
-    width: 90vw;
-    margin: 0 auto;
   `
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>

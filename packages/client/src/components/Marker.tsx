@@ -2,6 +2,7 @@ import { AdvancedMarker, useMap } from '@vis.gl/react-google-maps'
 import type { Marker } from '@googlemaps/markerclusterer'
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import { useState, useEffect, useRef } from 'react'
+import { FaMapMarkerAlt } from 'react-icons/fa'
 
 export type points = { lat: number; lng: number } & { key: string }
 
@@ -41,6 +42,11 @@ const Markers = ({ points }: MarkerProps) => {
       }
     })
   }
+
+  const handleMarkerClick = (point: points) => {
+    console.log(point)
+  }
+
   return (
     <>
       {points?.map(point => (
@@ -48,8 +54,11 @@ const Markers = ({ points }: MarkerProps) => {
           position={point}
           key={point.key}
           ref={marker => setMarkerRef(marker, point.key)}
+          onClick={() => handleMarkerClick(point)}
         >
-          <span style={{ fontSize: '2rem' }}>⭐</span>
+          <span style={{ fontSize: '2rem', color: '#341F97' }}>
+            <FaMapMarkerAlt />
+          </span>
         </AdvancedMarker>
       ))}
     </>

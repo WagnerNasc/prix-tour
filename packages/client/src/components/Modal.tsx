@@ -2,7 +2,6 @@ import { Box, Button, Grommet, Layer, ThemeType } from 'grommet'
 import React from 'react'
 import Forms from './forms/forms'
 import styled from 'styled-components'
-// import Forms from './forms/forms';
 
 const customTheme: ThemeType = {
   button: {
@@ -13,6 +12,7 @@ const customTheme: ThemeType = {
         },
       },
     },
+
     hover: {
       background: '#3f414e',
     },
@@ -33,7 +33,7 @@ const Modal = () => {
         <Button
           primary
           label="+"
-          color={'#31363F'}
+          color={'#363636'}
           size="large"
           onClick={() => setShow(true)}
         />
