@@ -147,12 +147,13 @@ export class TouristAttractionRepository
     try {
       const query = {
         text: /* sql */ `
-          INSERT INTO tourist_attraction (id, name, description, latitude, longitude) 
-          VALUES ($1, $2, $3, $4, $5)`,
+          INSERT INTO tourist_attraction (id, name, description, cityId, latitude, longitude) 
+          VALUES ($1, $2, $3, $4, $5, $6)`,
         values: [
           touristAttraction.id,
           touristAttraction.name,
           touristAttraction.description,
+          touristAttraction.cityId,
           touristAttraction.latitude.toString(),
           touristAttraction.longitude.toString(),
         ],
