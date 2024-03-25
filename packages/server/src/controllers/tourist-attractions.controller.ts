@@ -1,4 +1,4 @@
-import { makeFetchTouristAttractionUseCase } from '../use-cases/factories/tourist-attraction/make-fetch-tourist-attraction.use-case'
+import { makeFetchTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-fetch-tourist-attraction'
 import {
   InternalServer,
   TouristAttractionAlreadyExists,
@@ -6,7 +6,7 @@ import {
 } from '@use-cases/errors'
 import { makeCreateCityUseCase } from '../use-cases/factories/tourist-attraction/make-create-city'
 import { makeCreateTouristAttractionUseCase } from '../use-cases/factories/tourist-attraction/make-create-tourist-attraction'
-import { makeListTouristAttractionsUseCase } from '../use-cases/factories/tourist-attraction/make-list-tourist-attractions.use-case'
+import { makeListTouristAttractionsUseCase } from '@use-cases/factories/tourist-attraction/make-list-tourist-attractions'
 import { Request, Response } from 'express'
 import { ZodError, z } from 'zod'
 import { makeUpdateTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-update-tourist-attraction.use-case'
