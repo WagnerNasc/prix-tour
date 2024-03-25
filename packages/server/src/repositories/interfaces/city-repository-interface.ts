@@ -1,4 +1,4 @@
-import { City } from '@/use-cases/interfaces/city-interface'
+import { City } from '@use-cases/interfaces/city-interface'
 
 export interface ICityRepository {
   findById(id: string): Promise<City | null>

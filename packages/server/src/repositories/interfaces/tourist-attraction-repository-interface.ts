@@ -1,4 +1,4 @@
-import { TouristAttraction } from '@/use-cases/interfaces/tourist-attraction-interface'
+import { TouristAttraction } from '@use-cases/interfaces/tourist-attraction-interface'
 import { OmitProps } from '@helpers/omit'
 import { Optional } from '@helpers/optional'
 
