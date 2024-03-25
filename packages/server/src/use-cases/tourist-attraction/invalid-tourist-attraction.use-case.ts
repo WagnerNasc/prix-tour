@@ -1,4 +1,4 @@
-import { ITouristAttractionRepository } from '@/repositories/interfaces/tourist-attraction-repository-interface'
+import { ITouristAttractionRepository } from '@repositories/interfaces/tourist-attraction-repository-interface'
 import { TouristAttractionNotFound } from '../errors'
 
 export class InvalidTouristAttractionsUseCase {

@@ -4,7 +4,7 @@ import {
   TouristAttractionAlreadyExists,
   TouristAttractionNotFound,
 } from '@use-cases/errors'
-import { makeCreateCityUseCase } from '../use-cases/factories/tourist-attraction/make-create-city'
+import { makeCreateCityUseCase } from '../use-cases/factories/city/make-create-city'
 import { makeCreateTouristAttractionUseCase } from '../use-cases/factories/tourist-attraction/make-create-tourist-attraction'
 import { makeListTouristAttractionsUseCase } from '@use-cases/factories/tourist-attraction/make-list-tourist-attractions'
 import { Request, Response } from 'express'

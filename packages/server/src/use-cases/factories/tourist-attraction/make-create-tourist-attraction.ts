@@ -1,5 +1,5 @@
 import { RepositoryFactory } from '@repositories/factory.repository'
-import { CreateTouristAttractionUseCase } from '@use-cases/tourist-attraction/create-tourist-attraction.use-case'
+import { CreateTouristAttractionUseCase } from '@use-cases/tourist-attraction/create-tourist-attraction'
 
 export function makeCreateTouristAttractionUseCase() {
   const touristAttractionRepository =

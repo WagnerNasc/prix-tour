@@ -2,9 +2,11 @@ import express, { NextFunction, Request, Response } from 'express'
 import routes from './routes'
 import { ZodError } from 'zod'
 import cors from 'cors'
+import helmet from 'helmet'
 
 const app = express()
 app.use(express.json())
+app.use(helmet())
 
 const corsOptions = {
   origin: 'http://localhost:5173',
@@ -12,7 +14,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 /* pre handler log */
-app.use(function (req: Request, res: Response, next: NextFunction) {
+app.use(function (req: Request, _res: Response, next: NextFunction) {
   console.log(`[${req.method}] ${req.url}`)
   next()
 })
