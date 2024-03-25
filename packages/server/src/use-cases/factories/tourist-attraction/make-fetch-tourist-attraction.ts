@@ -1,4 +1,4 @@
-import { FetchTouristAttractionsUseCase } from '@use-cases/tourist-attraction/fetch-tourist-attraction'
+import { FetchTouristAttractionsUseCase } from '@use-cases/tourist-attraction/fetch-tourist-attraction.use-case'
 import { RepositoryFactory } from '@repositories/factory.repository'
 
 export function makeFetchTouristAttractionUseCase() {

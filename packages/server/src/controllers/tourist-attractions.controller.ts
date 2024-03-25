@@ -9,8 +9,8 @@ import { makeCreateTouristAttractionUseCase } from '../use-cases/factories/touri
 import { makeListTouristAttractionsUseCase } from '@use-cases/factories/tourist-attraction/make-list-tourist-attractions'
 import { Request, Response } from 'express'
 import { ZodError, z } from 'zod'
-import { makeUpdateTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-update-tourist-attraction.use-case'
-import { makeInvalidTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-invalid-tourist-attraction.use-case'
+import { makeUpdateTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-update-tourist-attraction'
+import { makeInvalidTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-invalid-tourist-attraction'
 
 export class TouristAttractionsController {
   static async listTouristAttractions(req: Request, res: Response) {
