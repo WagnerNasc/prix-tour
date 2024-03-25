@@ -1,4 +1,4 @@
-import { CreateCityUseCase } from '../../tourist-attraction/create-city.use-case'
+import { CreateCityUseCase } from '../../city/create'
 import { RepositoryFactory } from '@repositories/factory.repository'
 
 export function makeCreateCityUseCase() {
