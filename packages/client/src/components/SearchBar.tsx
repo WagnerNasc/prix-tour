@@ -17,7 +17,12 @@ const customTheme: ThemeType = {
     },
     font: {
       family: 'Roboto',
-      weight: 400,
+    },
+
+    input: {
+      font: {
+        weight: 400,
+      },
     },
   },
 }

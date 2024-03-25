@@ -7,7 +7,7 @@ import { PostAttraction } from '../../api/handlePost'
 
 const FormSection = styled.div`
   display: flex;
-  gap: 0.8rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;

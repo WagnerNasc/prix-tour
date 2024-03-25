@@ -1,31 +1,47 @@
-import { createGlobalStyle } from 'styled-components'
-import 'react-toastify/dist/ReactToastify.css'
+import { createGlobalStyle, css } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-  }
+  ${() => css`
+    * {
+      margin: 0;
+      outline: 0;
+      padding: 0;
+    }
 
-  :focus {
-    outline: 0;
-    box-shadow: 0 0 0 2px ${props => props.theme['blue-500']};
-  }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-  body {
-    background-color: ${props => props.theme['gray-800']};
-    color: ${props => props.theme['gray-100']};
-    -webkit-font-smoothing: antialiased;
-  }
+    html,
+    body {
+      height: 100%;
+    }
 
-  body, input, textarea {
-    font: 400 1rem 'Roboto', sans-serif;
-  }
 
-  h2 {
-    font-size: 1.37rem;
-    font-weight: 700;
-  }
+    body {
+      font-family: 'Roboto', sans-serif
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul,
+    li,
+    ol {
+      list-style: none;
+    }
+  `};
 `

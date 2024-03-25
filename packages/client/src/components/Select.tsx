@@ -17,11 +17,17 @@ const SelectFilter = () => {
         weight: 400,
       },
     },
+    select: {
+      icons: {
+        color: '#341F97',
+      },
+    },
   }
 
   return (
     <Grommet theme={customTheme}>
       <Select
+        style={{ fontWeight: '400' }}
         options={[]}
         value={value}
         placeholder={'Filtrar por'}

@@ -1,10 +1,15 @@
-import { AdvancedMarker, useMap } from '@vis.gl/react-google-maps'
+import { AdvancedMarker, InfoWindow, useMap } from '@vis.gl/react-google-maps'
 import type { Marker } from '@googlemaps/markerclusterer'
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import { useState, useEffect, useRef } from 'react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
+import { LocationsData } from '../utils/types/locationTypes'
+import { contentInfo } from './ContentInfoWindow'
+import { useOnClickOutside } from '../utils/hooks/onClickOutside'
 
-export type points = { lat: number; lng: number } & { key: string }
+export type points = { lat: number; lng: number } & {
+  key: string
+} & LocationsData
 
 type MarkerProps = {
   points: points[]
@@ -12,7 +17,14 @@ type MarkerProps = {
 
 const Markers = ({ points }: MarkerProps) => {
   const map = useMap()
+  const infoWindowRef = useRef<HTMLDivElement | null>(null)
+
+  useOnClickOutside(infoWindowRef, () => closeInfoWindow())
+
   const [markers, setMarkers] = useState<{ [key: string]: Marker }>({})
+  const [selectedMarker, setSelectedMarker] = useState<Marker | null>(null)
+  const [infowindowShown, setInfowindowShown] = useState(false)
+  const [information, setInformation] = useState<points | null>(null)
 
   const clusterer = useRef<MarkerClusterer | null>(null)
 
@@ -44,7 +56,13 @@ const Markers = ({ points }: MarkerProps) => {
   }
 
   const handleMarkerClick = (point: points) => {
-    console.log(point)
+    setSelectedMarker(markers[point.key])
+    setInfowindowShown(true)
+    setInformation(point)
+  }
+
+  const closeInfoWindow = () => {
+    setInfowindowShown(false)
   }
 
   return (
@@ -61,6 +79,17 @@ const Markers = ({ points }: MarkerProps) => {
           </span>
         </AdvancedMarker>
       ))}
+      {selectedMarker && infowindowShown && (
+        <InfoWindow
+          anchor={selectedMarker}
+          onCloseClick={closeInfoWindow}
+          content={contentInfo(
+            information?.name,
+            information?.description,
+            'Estado'
+          )}
+        />
+      )}
     </>
   )
 }

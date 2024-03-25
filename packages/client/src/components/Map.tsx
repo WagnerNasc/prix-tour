@@ -11,7 +11,9 @@ const MapComponent = () => {
   const extractPoints = async () => {
     const pointsGet = await getAllAttractions()
     const spacial = pointsGet?.map((point: LocationsData) => ({
-      ...point,
+      id: point.id,
+      name: point.name,
+      description: point.description,
       lat: Number(point.latitude),
       lng: Number(point.longitude),
       key: point.id.toString(),

@@ -4,7 +4,6 @@ import Map from '../../components/Map'
 import Modal from '../../components/Modal'
 import SearchBar from '../../components/SearchBar'
 import SelectFilter from '../../components/Select'
-import SideBar from '../../components/Sidebar'
 import { Filters, Header, Logo } from './styles'
 
 const Home = () => {
@@ -21,7 +20,6 @@ const Home = () => {
           <SelectFilter />
         </Filters>
         <Modal />
-        <SideBar />
       </Header>
       <Map />
     </Layout>
