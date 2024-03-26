@@ -46,18 +46,19 @@ export class CityRepository implements ICityRepository {
         SELECT
           id,
           name,
-          description,
+          is_capital,
           latitude,
-          longitude
+          longitude,
+          created_at
         FROM
-          tourist_attraction
+          city
       `
 
       if (filter) {
         query += /* sql */ `
           WHERE 
-            (name ILIKE '%${filter}%' OR 
-            email ILIKE '%${filter}%')
+            name ILIKE '%${filter}%'
+            AND  deleted_at IS NULL
         `
       }
 
@@ -97,24 +98,18 @@ export class CityRepository implements ICityRepository {
           INSERT INTO city (
             id, 
             name, 
-            state, 
-            country, 
-            iso, 
+            state_id, 
             is_capital, 
             population, 
-            population_proper, 
             latitude, 
             longitude) 
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+          VALUES ($1, $2, $3, $4, $5, $6, $7)`,
         values: [
           City.id,
           City.name,
-          City.state,
-          City.country,
-          City.iso,
+          City.stateId,
           City.isCapital.toString(),
           City.population.toString(),
-          City.populationProper.toString(),
           City.latitude.toString(),
           City.longitude.toString(),
         ],

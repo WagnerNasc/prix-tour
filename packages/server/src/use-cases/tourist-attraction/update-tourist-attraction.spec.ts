@@ -1,5 +1,5 @@
 import { InMemoryTouristAttractionRepository } from '@test/in-memory/in-memory-tourist-attraction.repository'
-import { UpdateTouristAttractionsUseCase } from './update-tourist-attraction'
+import { UpdateTouristAttractionsUseCase } from './update-tourist-attraction.use-case'
 import { makeTouristAttraction } from '@test/factories/make-tourist-attraction'
 import { TouristAttractionNotFound } from '@use-cases/errors'
 

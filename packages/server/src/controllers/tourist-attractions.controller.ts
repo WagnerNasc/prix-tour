@@ -11,6 +11,7 @@ import { Request, Response } from 'express'
 import { ZodError, z } from 'zod'
 import { makeUpdateTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-update-tourist-attraction'
 import { makeInvalidTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-invalid-tourist-attraction'
+import { makeListCitiesUseCase } from '@use-cases/factories/tourist-attraction/make-list-cities'
 
 export class TouristAttractionsController {
   static async listTouristAttractions(req: Request, res: Response) {
@@ -29,6 +30,13 @@ export class TouristAttractionsController {
 
       return res.json(touristAttractions)
     } catch (error) {
+      if (error instanceof ZodError) {
+        return res
+          .status(400)
+          .json({ message: 'Validation error.', issues: error.issues })
+      }
+
+      res.status(500).json({ message: 'Internal server error.' })
       throw new InternalServer()
     }
   }
@@ -52,6 +60,7 @@ export class TouristAttractionsController {
         return res.status(404).send({ message: error.message })
       }
 
+      res.status(500).json({ message: 'Internal server error.' })
       throw new InternalServer()
     }
   }
@@ -89,6 +98,7 @@ export class TouristAttractionsController {
         return res.status(404).send({ message: error.message })
       }
 
+      res.status(500).json({ message: 'Internal server error.' })
       throw error
     }
   }
@@ -113,6 +123,7 @@ export class TouristAttractionsController {
         return res.status(404).send({ message: error.message })
       }
 
+      res.status(500).json({ message: 'Internal server error.' })
       throw new InternalServer()
     }
   }
@@ -160,8 +171,35 @@ export class TouristAttractionsController {
           .status(400)
           .json({ message: 'Validation error.', issues: error.issues })
       }
-      console.log(error)
 
+      res.status(500).json({ message: 'Internal server error.' })
+      throw new InternalServer()
+    }
+  }
+
+  static async listCities(req: Request, res: Response) {
+    try {
+      const citiesQuerySchema = z.object({
+        filter: z.string().optional(),
+        page: z.coerce.number().min(1).default(1),
+      })
+
+      const { filter, page } = citiesQuerySchema.parse(req.query)
+      const citiesUseCase = makeListCitiesUseCase()
+      const cities = await citiesUseCase.execute({
+        filter,
+        page,
+      })
+
+      return res.json(cities)
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res
+          .status(400)
+          .json({ message: 'Validation error.', issues: error.issues })
+      }
+
+      res.status(500).json({ message: 'Internal server error.' })
       throw new InternalServer()
     }
   }
@@ -170,12 +208,9 @@ export class TouristAttractionsController {
     try {
       const createCityBodySchema = z.object({
         name: z.string(),
-        state: z.string(),
-        country: z.string(),
-        iso: z.string().max(2),
+        stateId: z.string(),
         isCapital: z.coerce.boolean(),
         population: z.coerce.number(),
-        populationProper: z.coerce.number(),
         latitude: z.coerce.number().refine((value) => {
           return Math.abs(value) <= 90
         }),
@@ -198,6 +233,7 @@ export class TouristAttractionsController {
           .json({ message: 'Validation error.', issues: error.issues })
       }
 
+      res.status(500).json({ message: 'Internal server error.' })
       throw new InternalServer()
     }
   }

@@ -1,5 +1,5 @@
 import { InMemoryTouristAttractionRepository } from '@test/in-memory/in-memory-tourist-attraction.repository'
-import { ListTouristAttractionsUseCase } from './list-tourist-attractions'
+import { ListTouristAttractionsUseCase } from './list-tourist-attractions.use-case'
 import { makeTouristAttraction } from '@test/factories/make-tourist-attraction'
 
 let inMemoryTouristAttractionRepository: InMemoryTouristAttractionRepository
