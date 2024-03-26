@@ -1,4 +1,4 @@
-import { ITouristAttractionRepository } from '@/repositories/interfaces/tourist-attraction-repository-interface'
+import { ITouristAttractionRepository } from '@repositories/interfaces/tourist-attraction-repository-interface'
 import { TouristAttractionNotFound } from '../errors'
 import { TouristAttraction } from '@use-cases/interfaces/tourist-attraction-interface'
 import { OmitProps } from '@helpers/omit'
