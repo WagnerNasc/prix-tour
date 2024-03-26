@@ -17,7 +17,7 @@ const Home = () => {
         />
         <Filters>
           <SearchBar />
-          <SelectFilter />
+          <SelectFilter placeholder="Filtrar por" options={[]} />
         </Filters>
         <Modal />
       </Header>

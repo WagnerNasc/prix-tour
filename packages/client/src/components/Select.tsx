@@ -1,7 +1,7 @@
 import { Grommet, Select, ThemeType } from 'grommet'
 import React from 'react'
 
-const SelectFilter = () => {
+const SelectFilter = (placeholder: string, options: string[]) => {
   const [value, setValue] = React.useState('')
 
   const customTheme: ThemeType = {
@@ -28,9 +28,9 @@ const SelectFilter = () => {
     <Grommet theme={customTheme}>
       <Select
         style={{ fontWeight: '400' }}
-        options={[]}
+        options={options}
         value={value}
-        placeholder={'Filtrar por'}
+        placeholder={placeholder}
         onChange={({ option }) => setValue(option)}
       />
     </Grommet>
