@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import { APIProvider, Map } from '@vis.gl/react-google-maps'
 import Markers, { points } from './Marker'
 import { LocationsData } from '../utils/types/locationTypes'
-import { getAllAttractions } from '../api/handleGetAll'
+import { getAll } from '../api/handleGetAll'
 
 const MapComponent = () => {
   const [points, setPoints] = useState<points[]>([])
 
   const extractPoints = async () => {
-    const pointsGet = await getAllAttractions()
+    const pointsGet = await getAll('/tourist-attractions')
     const spacial = pointsGet?.map((point: LocationsData) => ({
       id: point.id,
       name: point.name,

@@ -1,7 +1,12 @@
 import { Grommet, Select, ThemeType } from 'grommet'
 import React from 'react'
 
-const SelectFilter = (placeholder: string, options: string[]) => {
+type SelectFilterProps = {
+  placeholder: string
+  options: string[]
+}
+
+const SelectFilter = ({ placeholder, options }: SelectFilterProps) => {
   const [value, setValue] = React.useState('')
 
   const customTheme: ThemeType = {

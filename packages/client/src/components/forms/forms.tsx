@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { schema } from './schema'
 import { z, ZodError } from 'zod'
 import { PostAttraction } from '../../api/handlePost'
+import SelectFilter from '../Select'
+import { getAll } from '../../api/handleGetAll'
 
 const FormSection = styled.div`
   display: flex;
@@ -65,44 +67,52 @@ const validateForm = (values: FormValues) => {
   }
 }
 
-const Forms = () => (
-  <FormSection>
-    <Title>Crie uma atração</Title>
-    <Formik
-      initialValues={{
-        name: '',
-        description: '',
-        latitude: '',
-        longitude: '',
-        image: '',
-        cityId: '015f6fe0-f3e7-42a3-bc1e-c46f65ee9f50',
-      }}
-      onSubmit={values => {
-        PostAttraction(values)
-      }}
-      validate={validateForm}
-    >
-      {props => (
-        <form onSubmit={props.handleSubmit}>
-          <FormSection>
-            {formFields.map(field => (
-              <FieldDiv key={field.id}>
-                <Field
-                  as={Input}
-                  type={field.type}
-                  name={field.field}
-                  placeholder={field.label}
-                  label={field.label}
-                />
-                <ErrorMessage name={field.field} component={ErrorDiv} />
-              </FieldDiv>
-            ))}
-            <Button type="submit">Criar</Button>
-          </FormSection>
-        </form>
-      )}
-    </Formik>
-  </FormSection>
-)
+const Forms = () => {
+  const getOptions = async () => {
+    const options = await getAll('/cities')
+    return options
+  }
+  console.log(getOptions())
+  return (
+    <FormSection>
+      <Title>Crie uma atração</Title>
+      <Formik
+        initialValues={{
+          name: '',
+          description: '',
+          latitude: '',
+          longitude: '',
+          image: '',
+          cityId: '015f6fe0-f3e7-42a3-bc1e-c46f65ee9f50',
+        }}
+        onSubmit={values => {
+          PostAttraction(values)
+        }}
+        validate={validateForm}
+      >
+        {props => (
+          <form onSubmit={props.handleSubmit}>
+            <FormSection>
+              {formFields.map(field => (
+                <FieldDiv key={field.id}>
+                  <Field
+                    as={Input}
+                    type={field.type}
+                    name={field.field}
+                    placeholder={field.label}
+                    label={field.label}
+                  />
+                  <ErrorMessage name={field.field} component={ErrorDiv} />
+                </FieldDiv>
+              ))}
+              <SelectFilter placeholder="Cidade" options={[]} />
+              <Button type="submit">Criar</Button>
+            </FormSection>
+          </form>
+        )}
+      </Formik>
+    </FormSection>
+  )
+}
 
 export default Forms
