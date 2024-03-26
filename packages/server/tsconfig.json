@@ -13,9 +13,10 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "@*": ["src/*"],
       "@infra/*": ["src/infra/*"],
       "@repositories/*": ["src/repositories/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@test/*": ["src/test/*"],
       "@use-cases/*": ["src/use-cases/*"]
     }
   }

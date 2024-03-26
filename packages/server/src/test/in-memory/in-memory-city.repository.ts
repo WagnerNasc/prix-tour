@@ -50,12 +50,9 @@ export class InMemoryCityRepository implements ICityRepository {
     this.items.push({
       id: city.id,
       name: city.name,
-      state: city.state,
-      country: city.country,
-      iso: city.iso,
+      stateId: city.stateId,
       isCapital: city.isCapital,
       population: city.population,
-      populationProper: city.populationProper,
       latitude: city.latitude,
       longitude: city.longitude,
       createdAt: new Date(),

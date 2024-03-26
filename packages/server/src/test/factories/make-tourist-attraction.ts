@@ -6,6 +6,7 @@ export function makeTouristAttraction(override: Partial<TouristAttractionDB>) {
     id: faker.string.uuid(),
     name: faker.person.firstName(),
     description: faker.lorem.sentence(),
+    imageLink: faker.internet.url(),
     cityId: faker.string.uuid(),
     latitude: faker.location.latitude(),
     longitude: faker.location.longitude(),

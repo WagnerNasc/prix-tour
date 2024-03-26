@@ -1,6 +1,6 @@
 import { InMemoryCityRepository } from '@test/in-memory/in-memory-city.repository'
 import { makeCity } from '@test/factories/make-city'
-import { CreateCityUseCase } from './create'
+import { CreateCityUseCase } from './create-city-use-case'
 
 let inMemoryCityRepository: InMemoryCityRepository
 let sut: CreateCityUseCase

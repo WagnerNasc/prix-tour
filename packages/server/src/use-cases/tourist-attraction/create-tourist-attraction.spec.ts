@@ -1,5 +1,5 @@
 import { InMemoryTouristAttractionRepository } from '@test/in-memory/in-memory-tourist-attraction.repository'
-import { CreateTouristAttractionUseCase } from './create-tourist-attraction'
+import { CreateTouristAttractionUseCase } from './create-tourist-attraction.use-case'
 import { InMemoryCityRepository } from '@test/in-memory/in-memory-city.repository'
 import { makeTouristAttraction } from '@test/factories/make-tourist-attraction'
 import { makeCity } from '@test/factories/make-city'
