@@ -5,7 +5,7 @@ export const Header = styled.header`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
 `
 
 export const Logo = styled.img`

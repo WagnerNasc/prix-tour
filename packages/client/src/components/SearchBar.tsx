@@ -15,6 +15,15 @@ const customTheme: ThemeType = {
         size: '0px',
       },
     },
+    font: {
+      family: 'Roboto',
+    },
+
+    input: {
+      font: {
+        weight: 400,
+      },
+    },
   },
 }
 

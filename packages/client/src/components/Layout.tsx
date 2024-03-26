@@ -5,7 +5,7 @@ type LayoutProps = {
 }
 
 const Div = styled.div`
-  margin: 2rem 2rem;
+  margin: 0rem 6rem;
 `
 
 const Layout = ({ children }: LayoutProps) => {

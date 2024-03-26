@@ -1,16 +1,39 @@
-import { Select } from 'grommet'
+import { Grommet, Select, ThemeType } from 'grommet'
 import React from 'react'
 
-const SelectFilter = () => {
+const SelectFilter = (placeholder: string, options: string[]) => {
   const [value, setValue] = React.useState('')
 
+  const customTheme: ThemeType = {
+    global: {
+      focus: {
+        shadow: {
+          color: 'none',
+          size: '0px',
+        },
+      },
+      font: {
+        family: 'Roboto',
+        weight: 400,
+      },
+    },
+    select: {
+      icons: {
+        color: '#341F97',
+      },
+    },
+  }
+
   return (
-    <Select
-      options={[]}
-      value={value}
-      placeholder={'Filtrar por'}
-      onChange={({ option }) => setValue(option)}
-    />
+    <Grommet theme={customTheme}>
+      <Select
+        style={{ fontWeight: '400' }}
+        options={options}
+        value={value}
+        placeholder={placeholder}
+        onChange={({ option }) => setValue(option)}
+      />
+    </Grommet>
   )
 }
 

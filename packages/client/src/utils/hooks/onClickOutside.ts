@@ -5,7 +5,6 @@ export const useOnClickOutside = (
   handler: (event: MouseEvent | TouchEvent) => void
 ) => {
   React.useEffect(() => {
-    console.log(ref, handler)
     const listener = (event: MouseEvent | TouchEvent) => {
       if (!ref.current || ref.current.contains(event.target as Node)) {
         return
