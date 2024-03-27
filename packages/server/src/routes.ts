@@ -28,6 +28,7 @@ routes.delete(
 
 /* City */
 
+routes.get('/cities', TouristAttractionsController.listCities)
 routes.post('/cities', TouristAttractionsController.createCity)
 
 export default routes

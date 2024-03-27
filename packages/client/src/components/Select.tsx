@@ -1,12 +1,18 @@
 import { Grommet, Select, ThemeType } from 'grommet'
 import React from 'react'
+import { CitiesData } from '../utils/types/citiesTypes'
 
 type SelectFilterProps = {
   placeholder: string
-  options: string[]
+  options: CitiesData[]
+  onScroll?: (event: React.UIEvent<HTMLDivElement>) => void
 }
 
-const SelectFilter = ({ placeholder, options }: SelectFilterProps) => {
+const SelectFilter = ({
+  placeholder,
+  options,
+  onScroll,
+}: SelectFilterProps) => {
   const [value, setValue] = React.useState('')
 
   const customTheme: ThemeType = {
@@ -33,10 +39,11 @@ const SelectFilter = ({ placeholder, options }: SelectFilterProps) => {
     <Grommet theme={customTheme}>
       <Select
         style={{ fontWeight: '400' }}
-        options={options}
+        options={options?.map(option => option?.name)}
         value={value}
         placeholder={placeholder}
         onChange={({ option }) => setValue(option)}
+        onMore={onScroll}
       />
     </Grommet>
   )

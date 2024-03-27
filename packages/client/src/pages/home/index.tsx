@@ -10,6 +10,7 @@ import { useFilters } from '../../contexts/MapsContext'
 const Home = () => {
   const navigate = useNavigate()
   const { searchFound } = useFilters()
+
   return (
     <Layout>
       <Header>
