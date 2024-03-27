@@ -24,8 +24,12 @@ const MapComponent = ({ searchValue }: MapComponentProps) => {
     setPoints(spacial)
   }
   const extractPoints = async () => {
-    const pointsGet: LocationsData[] = await getAll('/tourist-attractions')
-    spacialValues(pointsGet)
+    try {
+      const pointsGet: LocationsData[] = await getAll('/tourist-attractions')
+      spacialValues(pointsGet)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleFilters = () => {

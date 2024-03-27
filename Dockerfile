@@ -1,14 +1,14 @@
 FROM node:20.10-alpine
 
 RUN apk update && \
-apk add openssl && \
-apk add openssl-dev && \
-apk add libc6-compat && \
-apk add libssl1.1 && \
-apk add curl && \
-apk add wget && \
-apk add git && \
-apk add yarn
+apk add --no-cache -v \
+openssl \
+openssl-dev \
+libc6-compat \
+curl \
+wget \
+git \
+yarn
 
 ENV HOME=/usr/src/app
 
