@@ -10,7 +10,7 @@
     "build": "node build/server.js",
     "migrate": "ts-node ../../node_modules/node-pg-migrate/bin/node-pg-migrate -m ./migrations -j ts",
     "seed": "ts-node seeds/index.ts",
-    "test": "jest",
+    "test:unit": "jest --verbose",
     "test:cov": "jest --coverage",
     "test:watch": "jest --watchAll"
   },

@@ -31,6 +31,14 @@ const config: Config = {
     '!<rootDir>/src/server.ts',
     '!<rootDir>/src/app.ts',
   ],
+  coverageThreshold: {
+    global: {
+      statements: 80,
+      branches: 80,
+      functions: 80,
+      lines: 80,
+    },
+  },
 }
 
 export default config
