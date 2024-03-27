@@ -5,9 +5,11 @@ import Modal from '../../components/Modal'
 import SearchBar from '../../components/SearchBar'
 import SelectFilter from '../../components/Select'
 import { Filters, Header, Logo } from './styles'
+import { useFilters } from '../../contexts/MapsContext'
 
 const Home = () => {
   const navigate = useNavigate()
+  const { searchFound } = useFilters()
   return (
     <Layout>
       <Header>
@@ -21,7 +23,7 @@ const Home = () => {
         </Filters>
         <Modal />
       </Header>
-      <Map />
+      <Map searchValue={searchFound} />
     </Layout>
   )
 }

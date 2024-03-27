@@ -1,8 +1,9 @@
 import { DataSearch, Grommet, ThemeType, Toolbar } from 'grommet'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { getAll } from '../api/handleGetAll'
 import { LocationsData } from '../utils/types/locationTypes'
 import { ResultBox } from './Toolbar'
+import { useFilters } from '../contexts/MapsContext'
 
 const customTheme: ThemeType = {
   global: {
@@ -25,20 +26,28 @@ const customTheme: ThemeType = {
 }
 
 const SearchBar = () => {
-  const [value, setValue] = React.useState('')
+  const [searchValue, setSearchValue] = React.useState('')
   const [options, setOptions] = React.useState<LocationsData[]>([])
 
-  const handleData = async () => {
+  const { setSearchFound = () => null } = useFilters()
+
+  const handleData = async (value: string) => {
     const res = await getAll(`/tourist-attractions?filter=${value}`)
     setOptions(res)
   }
-  useMemo(() => {
-    handleData()
-  }, [value])
+
+  const handleChange = (newValue: string) => {
+    setSearchValue(newValue)
+    handleData(newValue)
+    if (newValue === '') {
+      setSearchFound(null)
+    }
+  }
 
   const handleClick = (option: LocationsData) => {
     setOptions([])
-    setValue(option.name)
+    setSearchFound(option)
+    setSearchValue(option.name)
   }
 
   return (
@@ -47,15 +56,20 @@ const SearchBar = () => {
         <Toolbar>
           <DataSearch
             placeholder={'Busca por nome'}
-            value={value}
-            onChange={e => setValue(e.target.value)}
+            value={searchValue}
+            onChange={e => handleChange(e.target.value)}
           />
         </Toolbar>
         <ResultBox>
-          {value &&
+          {searchValue &&
             options?.map((option, index) => (
               <div
-                style={{ cursor: 'pointer' }}
+                style={{
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  paddingLeft: '1rem',
+                  paddingTop: '0.5rem',
+                }}
                 key={index}
                 onClick={() => handleClick(option)}
               >
