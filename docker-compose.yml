@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  backend:
+    container_name: backend
+    command: sh -c "yarn workspace server migrate up && yarn workspace server seed && yarn start"
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      prix-tour-db:
+        condition: service_healthy
+    environment:
+      WAIT_HOSTS: prix-tour-db:5432
+    volumes:
+      - .:/usr/src/app
+
+        
+  prix-tour-db:
+    container_name: prix-tour-db
+    restart: always
+    image: postgis/postgis
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: prix-tour-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docker"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
