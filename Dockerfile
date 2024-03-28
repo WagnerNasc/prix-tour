@@ -28,7 +28,7 @@ COPY . .
 EXPOSE 3000
 
 CMD /wait && \
-    yarn && \
-    yarn workspace server migrate up && \
-    yarn workspace server seed && \
+    sh -c yarn && \ 
+    yarn migrate && \
+    yarn seed && \
     yarn start

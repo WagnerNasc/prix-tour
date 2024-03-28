@@ -3,7 +3,6 @@ version: '3.7'
 services:
   backend:
     container_name: backend
-    command: sh -c "yarn workspace server migrate up && yarn workspace server seed && yarn start"
     build: .
     ports:
       - '3001:3001'
