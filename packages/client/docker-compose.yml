@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  frontend:
+    container_name: frontend
+    build: 
+      context: .
+      target: client-dev
+    ports:
+      - 5173:5173
+    environment:
+      VITE_GOOGLE_API_KEY: AIzaSyCWy5qfDDQz8qFhdVX5IkNEP_8e95roVUs
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
