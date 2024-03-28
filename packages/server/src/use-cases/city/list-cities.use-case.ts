@@ -11,7 +11,9 @@ export class ListCitiesUseCase {
 
   public async execute({ filter, page }: ListCitiesUseCaseRequest): Promise<{
     data: City[]
-    total: number
+    total_list: number
+    total_cities: number
+    total_pages: number
   }> {
     return this.cityRepository.findManyWithFilter(page, filter)
   }
