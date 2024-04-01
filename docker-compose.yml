@@ -39,7 +39,7 @@ services:
     restart: always
     image: postgis/postgis
     env_file:
-      - ./packages/server/.env
+      - .env
     environment:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
