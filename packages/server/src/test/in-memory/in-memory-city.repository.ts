@@ -25,7 +25,12 @@ export class InMemoryCityRepository implements ICityRepository {
   async findManyWithFilter(
     page: number,
     filter?: string | undefined,
-  ): Promise<{ data: City[]; total: number }> {
+  ): Promise<{
+    data: City[]
+    total_list: number
+    total_cities: number
+    total_pages: number
+  }> {
     const cities = this.items
       .filter((item) => item.deletedAt === null)
       .slice((page - 1) * 10, page * 10)
@@ -33,7 +38,9 @@ export class InMemoryCityRepository implements ICityRepository {
     if (!filter) {
       return {
         data: cities,
-        total: cities.length,
+        total_list: cities.length,
+        total_cities: this.items.length,
+        total_pages: this.items.length / 10,
       }
     }
 
@@ -42,7 +49,9 @@ export class InMemoryCityRepository implements ICityRepository {
 
     return {
       data: citiesFiltered,
-      total: citiesFiltered.length,
+      total_list: citiesFiltered.length,
+      total_cities: this.items.length,
+      total_pages: this.items.length / 10,
     }
   }
 
