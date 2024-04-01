@@ -40,7 +40,12 @@ export class CityRepository implements ICityRepository {
   async findManyWithFilter(
     page: number,
     filter?: string,
-  ): Promise<{ data: City[]; total: number }> {
+  ): Promise<{
+    data: City[]
+    total_list: number
+    total_cities: number
+    total_pages: number
+  }> {
     try {
       let query = /* sql */ `
         SELECT
@@ -70,21 +75,35 @@ export class CityRepository implements ICityRepository {
         OFFSET ${offset}
       `
 
-      const countQuery = /* sql */ `
+      const countTotalListQuery = /* sql */ `
         SELECT 
-          COUNT(*) as total 
+          COUNT(*) as total_list
         FROM (
           ${query}
         )
       `
 
-      const countResult = await this.pool.query(countQuery)
-      const total = parseInt(countResult.rows[0].total, 10)
+      const countQueryTotalCities = /* sql */ `
+        SELECT 
+          COUNT(*) as total_cities
+        FROM
+          city
+      `
+
+      const countTotalList = await this.pool.query(countTotalListQuery)
+      const countTotalCities = await this.pool.query(countQueryTotalCities)
+      const totalList = parseInt(countTotalList.rows[0].total_list, 10)
+      const totalCities = parseInt(countTotalCities.rows[0].total_cities)
 
       const queryResult = await this.pool.query(query)
       const cities: City[] = queryResult.rows
 
-      return { data: cities, total }
+      return {
+        data: cities,
+        total_list: totalList,
+        total_cities: totalCities,
+        total_pages: totalCities / 10,
+      }
     } catch (error) {
       console.error('Error to list cities:', error)
       throw error
