@@ -20,7 +20,7 @@ jobs:
           cache: 'yarn'
 
       - name: Install modules
-        run: yarn workspace server ci
+        run: yarn workspace server install --frozen-lockfile
       
       - name: Running tests
         run: yarn workspace server test:unit
