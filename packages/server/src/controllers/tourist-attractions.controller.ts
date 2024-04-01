@@ -137,7 +137,7 @@ export class TouristAttractionsController {
         latitude: z.coerce.number().refine((value) => {
           return Math.abs(value) <= 90
         }),
-        longitude: z.coerce.number().refine(value => {
+        longitude: z.coerce.number().refine((value) => {
           return Math.abs(value) <= 180
         }),
         imageLink: z.string().url().optional(),
