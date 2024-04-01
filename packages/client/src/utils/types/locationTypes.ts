@@ -4,4 +4,6 @@ export type LocationsData = {
   description: string
   latitude: string
   longitude: string
+  image_link: string
+  city_id: string
 }
