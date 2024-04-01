@@ -1,20 +1,21 @@
 name: Sonarqube Backend
-on:
-  push:
-    paths:
-      - 'packages/server/**'
-      - '.github/workflows/**'
-    branches:
-      - main
 
-  pull_request:
-    paths:
-      - 'packages/server/**'
-      - '.github/workflows/**'
-    types:
-      - opened
-      - synchronize
-      - reopened
+on: [push]
+  # push:
+  #   paths:
+  #     - 'packages/server/**'
+  #     - '.github/workflows/**'
+  #   branches:
+  #     - main
+
+  # pull_request:
+  #   paths:
+  #     - 'packages/server/**'
+  #     - '.github/workflows/**'
+  #   types:
+  #     - opened
+  #     - synchronize
+  #     - reopened
   
 jobs:
   sonarcloud:
