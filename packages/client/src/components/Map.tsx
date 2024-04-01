@@ -1,15 +1,18 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { APIProvider, Map } from '@vis.gl/react-google-maps'
 import Markers, { points } from './Marker'
 import { LocationsData } from '../utils/types/locationTypes'
-import { getAllAttractions } from '../api/handleGetAll'
+import { getAll } from '../api/handleGetAll'
 
-const MapComponent = () => {
+type MapComponentProps = {
+  searchValue: LocationsData | null
+}
+
+const MapComponent = ({ searchValue }: MapComponentProps) => {
   const [points, setPoints] = useState<points[]>([])
 
-  const extractPoints = async () => {
-    const pointsGet = await getAllAttractions()
+  const spacialValues = (pointsGet: LocationsData[]) => {
     const spacial = pointsGet?.map((point: LocationsData) => ({
       id: point.id,
       name: point.name,
@@ -20,10 +23,34 @@ const MapComponent = () => {
     }))
     setPoints(spacial)
   }
+  const extractPoints = async () => {
+    try {
+      const pointsGet: LocationsData[] = await getAll('/tourist-attractions')
+      spacialValues(pointsGet)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  useMemo(() => {
+  const handleFilters = () => {
+    try {
+      if (searchValue) {
+        spacialValues([searchValue] as LocationsData[])
+        return
+      }
+      extractPoints()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
     extractPoints()
   }, [])
+
+  useMemo(() => {
+    handleFilters()
+  }, [searchValue])
 
   const center = useMemo(() => ({ lat: -14.2400732, lng: -53.1805017 }), [])
 

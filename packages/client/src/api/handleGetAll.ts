@@ -1,8 +1,8 @@
 import { api } from './api'
 
-export const getAllAttractions = async () => {
+export const getAll = async (path: string) => {
   try {
-    const res = await api.get('/tourist-attractions')
+    const res = await api.get(path)
     return res?.data?.data
   } catch (error) {
     console.error(error)

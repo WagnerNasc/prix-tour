@@ -9,7 +9,7 @@ import { useOnClickOutside } from '../utils/hooks/onClickOutside'
 
 export type points = { lat: number; lng: number } & {
   key: string
-} & LocationsData
+} & Partial<LocationsData>
 
 type MarkerProps = {
   points: points[]
