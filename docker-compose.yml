@@ -1,12 +1,28 @@
 version: '3.7'
 
-services:
+services:    
+  frontend:
+    container_name: frontend
+    build:
+      context: ./packages/client
+      target: client-dev
+    ports:
+      - 5173:5173
+    depends_on:
+      - prix-tour-db
+    environment:
+      WAIT_HOSTS: backend:3000
+      VITE_GOOGLE_API_KEY: AIzaSyCWy5qfDDQz8qFhdVX5IkNEP_8e95roVUs
+    volumes:
+      - /usr/src/app/node_modules
+      
   backend:
     container_name: backend
-    command: sh -c "yarn workspace server migrate up && yarn workspace server seed && yarn start"
-    build: .
+    build: 
+      context: ./packages/server
+      target: server-dev 
     ports:
-      - '3001:3001'
+      - '3000:3000'
     depends_on:
       - prix-tour-db
     environment:
@@ -26,3 +42,5 @@ services:
       - '5432:5432'
     volumes:
       - ./data-postgres:/var/lib/postgresql/data
+
+  
