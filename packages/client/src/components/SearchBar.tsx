@@ -68,6 +68,7 @@ const SearchBar = () => {
                   cursor: 'pointer',
                   fontSize: '1rem',
                   paddingLeft: '1rem',
+
                   paddingTop: '0.5rem',
                 }}
                 key={index}

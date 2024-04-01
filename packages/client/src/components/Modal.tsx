@@ -20,8 +20,8 @@ const customTheme: ThemeType = {
 }
 
 const FormSection = styled.div`
-  max-width: 30vw;
-  max-height: 60vh;
+  max-width: 40vw;
+  max-height: 100%;
   padding: 1.5rem;
 `
 

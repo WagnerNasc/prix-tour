@@ -21,6 +21,7 @@ const MapComponent = ({ searchValue }: MapComponentProps) => {
       lng: Number(point.longitude),
       key: point.id.toString(),
     }))
+    console.log(pointsGet)
     setPoints(spacial)
   }
   const extractPoints = async () => {

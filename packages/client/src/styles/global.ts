@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0;
       outline: 0;
       padding: 0;
+      font-family: 'Roboto', sans-serif;
     }
 
     *,
@@ -19,15 +20,11 @@ export const GlobalStyle = createGlobalStyle`
       height: 100%;
     }
 
-
     body {
-      font-family: 'Roboto', sans-serif
       scroll-behavior: smooth;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-
-
 
     button {
       cursor: pointer;

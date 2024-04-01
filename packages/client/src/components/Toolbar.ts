@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 
 export const ResultBox = styled.div`
+  display: flex;
+  flex-direction: column;
   max-height: 150px;
   max-width: 300px;
   overflow: auto;
   position: absolute;
   z-index: 10;
-  padding-top: 0.5rem;
   font-size: 1.1rem;
   background-color: white;
   border-radius: 0.5rem;
