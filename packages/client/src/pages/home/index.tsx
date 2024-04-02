@@ -17,6 +17,8 @@ const Home = () => {
     pointToAdd,
   } = useFilters()
 
+  console.log(isOpenAddToForm, pointToAdd)
+
   return (
     <Layout>
       <Header>
@@ -30,12 +32,13 @@ const Home = () => {
         </Filters>
         <Modal
           isOpen={isOpenAddToForm}
+          setModalOpen={setIsOpenAddToForm}
           newPoint={pointToAdd}
           setNewPoint={setPointToAdd}
         />
       </Header>
       <Map
-        isModalOpen={isOpenAddToForm}
+        newPoint={pointToAdd}
         searchValue={searchFound}
         setModalOpen={setIsOpenAddToForm}
         setNewPoint={setPointToAdd}

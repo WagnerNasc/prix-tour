@@ -7,12 +7,14 @@ import { getAll } from '../api/handleGetAll'
 
 type MapComponentProps = {
   searchValue: LocationsData | null
+  newPoint: points
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   setNewPoint: React.Dispatch<React.SetStateAction<points>>
 }
 
 const MapComponent = ({
   searchValue,
+  newPoint,
   setModalOpen,
   setNewPoint,
 }: MapComponentProps) => {
@@ -65,7 +67,7 @@ const MapComponent = ({
     if (points.length === 0) {
       return { lat: -14.2400732, lng: -53.1805017 }
     }
-    const lastPoint = points[0]
+    const lastPoint = newPoint.key ? newPoint : points[0]
     return { lat: lastPoint.lat, lng: lastPoint.lng }
   }, [points])
 

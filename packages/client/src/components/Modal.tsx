@@ -30,13 +30,13 @@ interface ModalProps {
   isOpen: boolean
   newPoint?: points
   setNewPoint?: React.Dispatch<React.SetStateAction<points>>
+  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Modal = ({ isOpen, newPoint, setNewPoint }: ModalProps) => {
+const Modal = ({ isOpen, newPoint, setNewPoint, setModalOpen }: ModalProps) => {
   const [show, setShow] = React.useState(false)
 
   useMemo(() => {
-    console.log(isOpen)
     setShow(isOpen)
   }, [isOpen])
   return (
@@ -54,6 +54,7 @@ const Modal = ({ isOpen, newPoint, setNewPoint }: ModalProps) => {
             onEsc={() => setShow(false)}
             onClickOutside={() => {
               setNewPoint?.({ key: '', lat: 0, lng: 0 })
+              setModalOpen?.(false)
               setShow(false)
             }}
           >
