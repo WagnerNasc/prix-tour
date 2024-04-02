@@ -16,6 +16,12 @@ export class CityNotFound extends Error {
   }
 }
 
+export class BadRequest extends Error {
+  constructor() {
+    super('Bad request error.')
+  }
+}
+
 export class InternalServer extends Error {
   constructor() {
     super('Internal server error.')

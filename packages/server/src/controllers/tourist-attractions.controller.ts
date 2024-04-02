@@ -1,5 +1,9 @@
 import { makeFetchTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-fetch-tourist-attraction'
-import { CityNotFound, TouristAttractionNotFound } from '@use-cases/errors'
+import {
+  BadRequest,
+  CityNotFound,
+  TouristAttractionNotFound,
+} from '@use-cases/errors'
 import { makeCreateCityUseCase } from '../use-cases/factories/city/make-create-city'
 import { makeCreateTouristAttractionUseCase } from '../use-cases/factories/tourist-attraction/make-create-tourist-attraction'
 import { makeListTouristAttractionsUseCase } from '@use-cases/factories/tourist-attraction/make-list-tourist-attractions'
@@ -8,7 +12,6 @@ import { ZodError, z } from 'zod'
 import { makeUpdateTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-update-tourist-attraction'
 import { makeInvalidTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-invalid-tourist-attraction'
 import { makeListCitiesUseCase } from '@use-cases/factories/tourist-attraction/make-list-cities'
-import { DatabaseExceptionErrors } from '@infra/errors'
 
 export class TouristAttractionsController {
   static async listTouristAttractions(req: Request, res: Response) {
@@ -98,7 +101,6 @@ export class TouristAttractionsController {
       }
 
       res.status(500).json({ message: 'Internal server error.' })
-      throw error
     }
   }
 
@@ -170,10 +172,9 @@ export class TouristAttractionsController {
           .json({ message: 'Validation error.', issues: error.issues })
       }
 
-      if (error.code === DatabaseExceptionErrors.VIOLATION_CONSTRAINT) {
+      if (error instanceof BadRequest) {
         return res.status(400).json({
-          message: 'Coordinates already exists.',
-          issues: error.issues,
+          message: error.message,
         })
       }
 
