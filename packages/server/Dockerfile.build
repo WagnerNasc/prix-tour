@@ -28,7 +28,7 @@ RUN chmod -R 777 /api
 USER node
 COPY package.json ./
 RUN yarn install --production --frozen-lockfile
-COPY --from=server-prod /api ./
+COPY --from=server-prod /usr/src/app ./
 
 CMD ["node", "start"]
 
