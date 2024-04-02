@@ -1,11 +1,12 @@
 node_modules
 .env
 .env.example
+docs
 .git
 .vscode
 .dockerignore
 .gitignore
-converage
+coverage
 test
 docker-compose.yaml
 Dockerfile
