@@ -5,6 +5,8 @@ node_modules
 .vscode
 .dockerignore
 .gitignore
+converage
+test
 docker-compose.yaml
 Dockerfile
 README.md
