@@ -134,7 +134,7 @@ export class TouristAttractionsController {
         name: z.string(),
         description: z.string(),
         cityId: z.string().uuid(),
-        latitude: z.coerce.number().refine((value) => {
+        latitude: z.coerce.number().refine(value => {
           return Math.abs(value) <= 90
         }),
         longitude: z.coerce.number().refine((value) => {

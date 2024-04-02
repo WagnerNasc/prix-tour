@@ -16,12 +16,15 @@ on:
       - opened
       - synchronize
       - reopened
+  workflow_run:
+    workflows: [unit-tests]
+    types:
+      - completed
   
 jobs:
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
-    needs: [unit-tests]
     steps:
       - uses: actions/checkout@v4
         with:
