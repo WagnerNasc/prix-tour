@@ -1,7 +1,7 @@
 import { AdvancedMarker, InfoWindow, useMap } from '@vis.gl/react-google-maps'
 import type { Marker } from '@googlemaps/markerclusterer'
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
 import { LocationsData } from '../utils/types/locationTypes'
 import { contentInfo } from './ContentInfoWindow'
@@ -35,7 +35,7 @@ const Markers = ({ points }: MarkerProps) => {
     }
   }, [map])
 
-  useEffect(() => {
+  useMemo(() => {
     clusterer.current?.clearMarkers()
     clusterer.current?.addMarkers(Object.values(markers))
   }, [markers])
@@ -86,7 +86,7 @@ const Markers = ({ points }: MarkerProps) => {
           content={contentInfo(
             information?.name,
             information?.description,
-            'Estado'
+            information?.image_link
           )}
         />
       )}

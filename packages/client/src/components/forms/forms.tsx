@@ -1,13 +1,22 @@
-import { Field, Formik, ErrorMessage, FieldProps } from 'formik'
+import { Field, Formik, ErrorMessage, FieldProps, FormikProps } from 'formik'
 import { formFields } from './data'
 import { schema } from './schema'
 import { z, ZodError } from 'zod'
 import { PostAttraction } from '../../api/handlePost'
-import { useState } from 'react'
-import { Button, ErrorDiv, FieldDiv, FormSection, Input, Title } from './styles'
+import { useEffect, useRef, useState } from 'react'
+import {
+  Button,
+  ErrorDiv,
+  FieldDiv,
+  FormSection,
+  Input,
+  Spinner,
+  Title,
+} from './styles'
 
 import { OptionType, loadOptions } from './loadOptions'
 import { AsyncPaginate } from 'react-select-async-paginate'
+import { points } from '../Marker'
 
 export type FormValues = z.infer<typeof schema>
 
@@ -21,8 +30,26 @@ const validateForm = (values: FormValues) => {
   }
 }
 
-const Forms = () => {
+interface FormsProps {
+  newPoint?: points
+  isModalOpen?: (isOpen: boolean) => void
+}
+
+const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
   const [value, onChange] = useState<OptionType | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const formikRef = useRef<FormikProps<FormValues>>(null)
+  const setNewPoint = (newPoint: points) => {
+    if (newPoint.key === '') return
+    formikRef.current?.setFieldValue('latitude', String(newPoint.lat))
+    formikRef.current?.setFieldValue('longitude', String(newPoint.lng))
+  }
+
+  useEffect(() => {
+    if (newPoint) {
+      setNewPoint(newPoint)
+    }
+  }, [newPoint])
 
   type AdditionalType = {
     page: number
@@ -70,12 +97,18 @@ const Forms = () => {
         }}
         onSubmit={values => {
           try {
+            setIsLoading(true)
             PostAttraction(values)
+            setTimeout(() => {
+              setIsLoading(false)
+            }, 1000)
+            isModalOpen?.(false)
           } catch (error) {
             console.log(error)
           }
         }}
         validate={validateForm}
+        innerRef={formikRef}
       >
         {props => (
           <form onSubmit={props.handleSubmit}>
@@ -128,7 +161,10 @@ const Forms = () => {
                   </FieldDiv>
                 )}
               </Field>
-              <Button type="submit">Criar</Button>
+              <Button type="submit" isLoading={isLoading}>
+                {' '}
+                {isLoading ? <Spinner /> : 'Cadastrar'}
+              </Button>
             </FormSection>
           </form>
         )}

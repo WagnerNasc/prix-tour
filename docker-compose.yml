@@ -1,26 +1,26 @@
 version: '3.7'
 
-services:    
-  frontend:
-    container_name: frontend
-    build:
-      context: ./packages/client
-      target: client-dev
-    env_file:
-      - .env
-    ports:
-      - 5173:5173
-    depends_on:
-      - prix-tour-db
-    environment:
-      WAIT_HOSTS: backend:3000
-      VITE_GOOGLE_API_KEY: ${VITE_GOOGLE_API_KEY}
-    volumes:
-      - /usr/src/app/node_modules
-      
+services:
+  # frontend:
+  #   container_name: frontend
+  #   build:
+  #     context: ./packages/client
+  #     target: client-dev
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - 5173:5173
+  #   depends_on:
+  #     - prix-tour-db
+  #   environment:
+  #     WAIT_HOSTS: backend:3000
+  #     VITE_GOOGLE_API_KEY: ${VITE_GOOGLE_API_KEY}
+  #   volumes:
+  #     - /usr/src/app/node_modules
+
   backend:
     container_name: backend
-    build: 
+    build:
       context: ./packages/server
       target: server-dev
     env_file:
@@ -48,5 +48,3 @@ services:
       - '5432:${DATABASE_PORT}'
     volumes:
       - ./data-postgres:/var/lib/postgresql/data
-
-  
