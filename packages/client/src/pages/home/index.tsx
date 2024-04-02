@@ -20,7 +20,7 @@ const Home = () => {
         />
         <Filters>
           <SearchBar />
-          <SelectFilter placeholder="Filtrar por" options={[]} />
+          <SelectFilter placeholder="Filtrar por " options={[]} />
         </Filters>
         <Modal />
       </Header>
