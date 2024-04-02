@@ -85,14 +85,13 @@ const MapComponent = ({
           key: `new-point-${current?.length}`,
         },
       ])
-      console.log(points)
       setNewPoint({
         lat: e.detail.latLng?.lat ?? 0,
         lng: e.detail.latLng?.lng ?? 0,
         key: `new-point-${points?.length}`,
       })
       setModalOpen(true)
-      setPoints(current => current.slice(0, -1))
+      // setPoints(current => current.slice(0, -1))
     }
   }
 

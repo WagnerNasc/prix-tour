@@ -61,7 +61,7 @@ const Modal = ({ isOpen, newPoint, setNewPoint, setModalOpen }: ModalProps) => {
             <FormSection>
               <Forms
                 newPoint={newPoint}
-                isModalOpen={isModalOpen => (isOpen = isModalOpen)}
+                isModalOpen={isOpen => setModalOpen?.(isOpen)}
               />
             </FormSection>
           </Layer>
