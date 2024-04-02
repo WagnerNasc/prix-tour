@@ -64,13 +64,13 @@ export class TouristAttractionRepository
           created_at
         FROM
           tourist_attraction
+        WHERE deleted_at IS NULL
       `
       // TODO: SQL Injection
       if (filter) {
         query += /* sql */ `
-          WHERE
-            name ILIKE '%${filter}%' 
-            AND  deleted_at IS NULL
+          AND
+            name ILIKE '%${filter}%'
         `
       }
 

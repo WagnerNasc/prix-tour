@@ -57,13 +57,13 @@ export class CityRepository implements ICityRepository {
           created_at
         FROM
           city
+        WHERE deleted_at IS NULL
       `
-
+      // TODO: SQL Injection
       if (filter) {
         query += /* sql */ `
-          WHERE 
+          AND
             name ILIKE '%${filter}%'
-            AND  deleted_at IS NULL
         `
       }
 
