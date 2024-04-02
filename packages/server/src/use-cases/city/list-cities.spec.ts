@@ -22,6 +22,7 @@ describe('List City', () => {
     inMemoryCityRepository.items.push(city1, city2)
     const { data } = await sut.execute({
       page: 1,
+      pageSize: 10,
     })
 
     expect(data).toEqual([
@@ -41,6 +42,7 @@ describe('List City', () => {
 
     const { data } = await sut.execute({
       page: 2,
+      pageSize: 10,
     })
 
     expect(data).toHaveLength(2)

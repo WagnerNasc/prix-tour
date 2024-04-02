@@ -1,6 +1,7 @@
 import { OmitProps } from '@helpers/omit'
 import { Optional } from '@helpers/optional'
 import { ITouristAttractionRepository } from '@repositories/interfaces/tourist-attraction-repository-interface'
+import { Paginated } from '@use-cases/interfaces/paginated-interface'
 import { TouristAttraction } from '@use-cases/interfaces/tourist-attraction-interface'
 
 export interface TouristAttractionDB extends TouristAttraction {
@@ -28,13 +29,14 @@ export class InMemoryTouristAttractionRepository
     }
   }
 
-  async findManyWithFilter(
-    page: number,
-    filter?: string | undefined,
-  ): Promise<{ data: TouristAttraction[]; total: number }> {
+  async findManyWithFilter({
+    page,
+    filter,
+    pageSize,
+  }: Paginated): Promise<{ data: TouristAttraction[]; total: number }> {
     const touristAttractions = this.items
       .filter((item) => item.deletedAt === null)
-      .slice((page - 1) * 10, page * 10)
+      .slice((page - 1) * pageSize, page * pageSize)
 
     if (!filter) {
       return {

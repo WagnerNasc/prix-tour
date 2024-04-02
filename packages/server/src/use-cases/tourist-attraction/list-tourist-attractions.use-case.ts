@@ -1,9 +1,10 @@
 import { ITouristAttractionRepository } from '@repositories/interfaces/tourist-attraction-repository-interface'
 import { TouristAttraction } from '../interfaces/tourist-attraction-interface'
 
-interface ListTouristAttractionsUseCaseRequest {
+export interface ListTouristAttractionsUseCaseRequest {
   page: number
   filter?: string
+  pageSize: number
 }
 
 export class ListTouristAttractionsUseCase {
@@ -12,12 +13,17 @@ export class ListTouristAttractionsUseCase {
   ) {}
 
   public async execute({
-    filter,
     page,
+    filter,
+    pageSize,
   }: ListTouristAttractionsUseCaseRequest): Promise<{
     data: TouristAttraction[]
     total: number
   }> {
-    return this.touristAttractionRepository.findManyWithFilter(page, filter)
+    return this.touristAttractionRepository.findManyWithFilter({
+      page,
+      pageSize,
+      filter,
+    })
   }
 }
