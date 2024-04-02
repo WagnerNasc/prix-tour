@@ -1,9 +1,5 @@
 import { makeFetchTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-fetch-tourist-attraction'
-import {
-  CityNotFound,
-  InternalServer,
-  TouristAttractionNotFound,
-} from '@use-cases/errors'
+import { CityNotFound, TouristAttractionNotFound } from '@use-cases/errors'
 import { makeCreateCityUseCase } from '../use-cases/factories/city/make-create-city'
 import { makeCreateTouristAttractionUseCase } from '../use-cases/factories/tourist-attraction/make-create-tourist-attraction'
 import { makeListTouristAttractionsUseCase } from '@use-cases/factories/tourist-attraction/make-list-tourist-attractions'
@@ -12,6 +8,7 @@ import { ZodError, z } from 'zod'
 import { makeUpdateTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-update-tourist-attraction'
 import { makeInvalidTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-invalid-tourist-attraction'
 import { makeListCitiesUseCase } from '@use-cases/factories/tourist-attraction/make-list-cities'
+import { DatabaseExceptionErrors } from '@infra/errors'
 
 export class TouristAttractionsController {
   static async listTouristAttractions(req: Request, res: Response) {
@@ -19,13 +16,17 @@ export class TouristAttractionsController {
       const listTouristAttractionQuerySchema = z.object({
         filter: z.string().optional(),
         page: z.coerce.number().min(1).default(1),
+        pageSize: z.coerce.number().min(10).max(50).default(10),
       })
 
-      const { filter, page } = listTouristAttractionQuerySchema.parse(req.query)
+      const { filter, page, pageSize } = listTouristAttractionQuerySchema.parse(
+        req.query,
+      )
       const listTouristAttractionsUseCase = makeListTouristAttractionsUseCase()
       const touristAttractions = await listTouristAttractionsUseCase.execute({
         filter,
         page,
+        pageSize,
       })
 
       return res.json(touristAttractions)
@@ -37,7 +38,6 @@ export class TouristAttractionsController {
       }
 
       res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
     }
   }
 
@@ -61,7 +61,6 @@ export class TouristAttractionsController {
       }
 
       res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
     }
   }
 
@@ -124,7 +123,6 @@ export class TouristAttractionsController {
       }
 
       res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
     }
   }
 
@@ -161,7 +159,7 @@ export class TouristAttractionsController {
       res.status(200).json({
         message: 'created successfully.',
       })
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof CityNotFound) {
         return res.status(409).send({ message: error.message })
       }
@@ -172,8 +170,14 @@ export class TouristAttractionsController {
           .json({ message: 'Validation error.', issues: error.issues })
       }
 
+      if (error.code === DatabaseExceptionErrors.VIOLATION_CONSTRAINT) {
+        return res.status(400).json({
+          message: 'Coordinates already exists.',
+          issues: error.issues,
+        })
+      }
+
       res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
     }
   }
 
@@ -182,13 +186,15 @@ export class TouristAttractionsController {
       const citiesQuerySchema = z.object({
         filter: z.string().optional(),
         page: z.coerce.number().min(1).default(1),
+        pageSize: z.coerce.number().min(10).max(50).default(1),
       })
 
-      const { filter, page } = citiesQuerySchema.parse(req.query)
+      const { filter, page, pageSize } = citiesQuerySchema.parse(req.query)
       const citiesUseCase = makeListCitiesUseCase()
       const cities = await citiesUseCase.execute({
         filter,
         page,
+        pageSize,
       })
 
       return res.json(cities)
@@ -200,7 +206,6 @@ export class TouristAttractionsController {
       }
 
       res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
     }
   }
 
@@ -235,7 +240,6 @@ export class TouristAttractionsController {
       }
 
       res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
     }
   }
 }
