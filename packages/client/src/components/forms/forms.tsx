@@ -1,12 +1,13 @@
-import { Field, Formik, ErrorMessage } from 'formik'
+import { Field, Formik, ErrorMessage, FieldProps } from 'formik'
 import { formFields } from './data'
 import { schema } from './schema'
 import { z, ZodError } from 'zod'
 import { PostAttraction } from '../../api/handlePost'
-import SelectFilter from '../Select'
-import { getAll } from '../../api/handleGetAll'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button, ErrorDiv, FieldDiv, FormSection, Input, Title } from './styles'
+
+import { OptionType, loadOptions } from './loadOptions'
+import { AsyncPaginate } from 'react-select-async-paginate'
 
 export type FormValues = z.infer<typeof schema>
 
@@ -21,33 +22,42 @@ const validateForm = (values: FormValues) => {
 }
 
 const Forms = () => {
-  const [cities, setCities] = useState([])
-  const [page, setPage] = useState(1)
+  const [value, onChange] = useState<OptionType | null>(null)
 
-  const getOptions = async (page: number) => {
-    try {
-      const options = await getAll(`/cities?page=${page}`)
-      setCities(options)
-      return options
-    } catch (error) {
-      console.error(error)
-    }
+  type AdditionalType = {
+    page: number
   }
 
-  useEffect(() => {
-    getOptions(page)
-  }, [page])
+  const defaultAdditional: AdditionalType = {
+    page: 1,
+  }
 
-  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-    const target = event?.target as HTMLDivElement
-    console.log(target, 'target')
-    if (target.scrollHeight - target.scrollTop === target.clientHeight) {
-      setPage(prevPage => prevPage + 1)
+  const loadPageOptions = async (
+    q: string,
+    _: unknown,
+    { page }: AdditionalType
+  ) => {
+    const { options, hasMore } = await loadOptions(q, page)
+
+    return {
+      options,
+      hasMore,
+
+      additional: {
+        page: page + 1,
+      },
     }
   }
 
   return (
-    <FormSection>
+    <div
+      style={{
+        width: '30vw',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+      }}
+    >
       <Title>Crie uma atração</Title>
       <Formik
         initialValues={{
@@ -55,11 +65,15 @@ const Forms = () => {
           description: '',
           latitude: '',
           longitude: '',
-          image: '',
-          cityId: '015f6fe0-f3e7-42a3-bc1e-c46f65ee9f50',
+          imageLink: '',
+          cityId: '',
         }}
         onSubmit={values => {
-          PostAttraction(values)
+          try {
+            PostAttraction(values)
+          } catch (error) {
+            console.log(error)
+          }
         }}
         validate={validateForm}
       >
@@ -68,6 +82,7 @@ const Forms = () => {
             <FormSection>
               {formFields.map(field => (
                 <FieldDiv key={field.id}>
+                  <label htmlFor={field.field}>{field.label}:</label>
                   <Field
                     as={Input}
                     type={field.type}
@@ -78,17 +93,47 @@ const Forms = () => {
                   <ErrorMessage name={field.field} component={ErrorDiv} />
                 </FieldDiv>
               ))}
-              <SelectFilter
-                placeholder="Cidade"
-                options={cities}
-                onScroll={handleScroll}
-              />
+              <Field name="cityId">
+                {({ field, form }: FieldProps) => (
+                  <FieldDiv>
+                    <label htmlFor="cityId">Cidade:</label>
+                    <AsyncPaginate
+                      {...field}
+                      additional={defaultAdditional}
+                      value={value}
+                      loadOptions={loadPageOptions}
+                      styles={{
+                        control: baseStyles => ({
+                          ...baseStyles,
+                          fontSize: '1rem',
+                          fontFamily: 'Roboto',
+                          height: 35,
+                        }),
+                        menuList: baseStyles => ({
+                          ...baseStyles,
+                          height: '200px',
+                        }),
+                      }}
+                      loadingMessage={() => 'Carregando...'}
+                      onChange={(selectedOption: OptionType | null) => {
+                        onChange(selectedOption)
+                        form.setFieldValue(
+                          field.name,
+                          selectedOption ? selectedOption.value : ''
+                        )
+                      }}
+                      placeholder="Selecione uma cidade"
+                    />
+                    <ErrorMessage name={'cityId'} component={ErrorDiv} />
+                  </FieldDiv>
+                )}
+              </Field>
               <Button type="submit">Criar</Button>
             </FormSection>
           </form>
         )}
       </Formik>
-    </FormSection>
+    </div>
   )
 }
 

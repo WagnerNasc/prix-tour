@@ -6,8 +6,8 @@ export const schema = z.object({
     .string()
     .min(3, 'Descrição muito curta')
     .max(255, 'Descrição muito longa'),
-  latitude: z.string(),
-  longitude: z.string(),
-  image: z.string().url(),
-  cityId: z.string(),
+  latitude: z.string().min(1, 'Latitude inválida'),
+  longitude: z.string().min(1, 'Longitude inválida'),
+  imageLink: z.string().url('URL inválida'),
+  cityId: z.string().min(1, 'Selecione uma cidade'),
 })

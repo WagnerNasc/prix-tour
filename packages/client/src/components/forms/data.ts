@@ -25,7 +25,7 @@ export const formFields = [
   },
   {
     id: '5',
-    field: 'image',
+    field: 'imageLink',
     label: 'Link da imagem',
     type: 'text',
   },
