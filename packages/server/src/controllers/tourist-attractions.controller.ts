@@ -18,8 +18,8 @@ export class TouristAttractionsController {
     try {
       const listTouristAttractionQuerySchema = z.object({
         filter: z.string().optional(),
-        page: z.coerce.number().min(1).default(1),
-        pageSize: z.coerce.number().min(10).max(50).default(10),
+        page: z.coerce.number().default(1),
+        pageSize: z.coerce.number().default(10),
       })
 
       const { filter, page, pageSize } = listTouristAttractionQuerySchema.parse(
@@ -186,8 +186,8 @@ export class TouristAttractionsController {
     try {
       const citiesQuerySchema = z.object({
         filter: z.string().optional(),
-        page: z.coerce.number().min(1).default(1),
-        pageSize: z.coerce.number().min(10).max(50).default(1),
+        page: z.coerce.number().default(1),
+        pageSize: z.coerce.number().default(10),
       })
 
       const { filter, page, pageSize } = citiesQuerySchema.parse(req.query)
