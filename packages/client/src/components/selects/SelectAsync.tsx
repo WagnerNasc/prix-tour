@@ -6,6 +6,7 @@ export type OptionType = {
 }
 
 const options: OptionType[] = []
+
 for (let i = 0; i < 50; ++i) {
   options.push({
     value: i + 1,

@@ -2,8 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/Layout'
 import Map from '../../components/Map'
 import Modal from '../../components/Modal'
-import SearchBar from '../../components/SearchBar'
-import SelectFilter from '../../components/Select'
+import SearchBar from '../../components/selects/SearchBar'
 import { Filters, Header, Logo } from './styles'
 import { useFilters } from '../../contexts/MapsContext'
 
@@ -17,8 +16,6 @@ const Home = () => {
     pointToAdd,
   } = useFilters()
 
-  console.log(isOpenAddToForm, pointToAdd)
-
   return (
     <Layout>
       <Header>
@@ -28,14 +25,13 @@ const Home = () => {
         />
         <Filters>
           <SearchBar />
-          <SelectFilter placeholder="Filtrar por" options={[]} />
+          <Modal
+            isOpen={isOpenAddToForm}
+            setModalOpen={setIsOpenAddToForm}
+            newPoint={pointToAdd}
+            setNewPoint={setPointToAdd}
+          />
         </Filters>
-        <Modal
-          isOpen={isOpenAddToForm}
-          setModalOpen={setIsOpenAddToForm}
-          newPoint={pointToAdd}
-          setNewPoint={setPointToAdd}
-        />
       </Header>
       <Map
         newPoint={pointToAdd}

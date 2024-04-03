@@ -19,6 +19,7 @@ const MapComponent = ({
   setNewPoint,
 }: MapComponentProps) => {
   const [points, setPoints] = useState<points[]>([])
+  console.log(searchValue)
 
   const spacialValues = (pointsGet: LocationsData[]) => {
     const spacial = pointsGet?.map((point: LocationsData) => ({

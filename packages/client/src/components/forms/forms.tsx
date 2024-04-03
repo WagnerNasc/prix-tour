@@ -17,8 +17,17 @@ import {
 import { OptionType, loadOptions } from './loadOptions'
 import { AsyncPaginate } from 'react-select-async-paginate'
 import { points } from '../Marker'
+import { controlStyles, menuListStyles } from '../selects/styles'
 
 export type FormValues = z.infer<typeof schema>
+interface FormsProps {
+  newPoint?: points
+  isModalOpen?: (isOpen: boolean) => void
+}
+
+type AdditionalType = {
+  page: number
+}
 
 const validateForm = (values: FormValues) => {
   try {
@@ -28,11 +37,6 @@ const validateForm = (values: FormValues) => {
       return error.formErrors.fieldErrors
     }
   }
-}
-
-interface FormsProps {
-  newPoint?: points
-  isModalOpen?: (isOpen: boolean) => void
 }
 
 const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
@@ -50,10 +54,6 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
       setNewPoint(newPoint)
     }
   }, [newPoint])
-
-  type AdditionalType = {
-    page: number
-  }
 
   const defaultAdditional: AdditionalType = {
     page: 1,
@@ -98,7 +98,7 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
         onSubmit={values => {
           try {
             setIsLoading(true)
-            PostAttraction(values)
+            PostAttraction('/tourist-attractions', values)
             setTimeout(() => {
               setIsLoading(false)
             }, 1000)
@@ -136,16 +136,8 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
                       value={value}
                       loadOptions={loadPageOptions}
                       styles={{
-                        control: baseStyles => ({
-                          ...baseStyles,
-                          fontSize: '1rem',
-                          fontFamily: 'Roboto',
-                          height: 35,
-                        }),
-                        menuList: baseStyles => ({
-                          ...baseStyles,
-                          height: '200px',
-                        }),
+                        control: controlStyles,
+                        menuList: menuListStyles,
                       }}
                       loadingMessage={() => 'Carregando...'}
                       onChange={(selectedOption: OptionType | null) => {
