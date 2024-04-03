@@ -1,6 +1,6 @@
 version: '3.7'
 
-services:    
+services:
   frontend:
     container_name: frontend
     build:
@@ -17,10 +17,10 @@ services:
       VITE_GOOGLE_API_KEY: ${VITE_GOOGLE_API_KEY}
     volumes:
       - /usr/src/app/node_modules
-      
+
   backend:
     container_name: backend
-    build: 
+    build:
       context: ./packages/server
       target: server-dev
     env_file:
@@ -48,5 +48,3 @@ services:
       - '5432:${DATABASE_PORT}'
     volumes:
       - ./data-postgres:/var/lib/postgresql/data
-
-  

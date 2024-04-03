@@ -9,7 +9,15 @@ import { useFilters } from '../../contexts/MapsContext'
 
 const Home = () => {
   const navigate = useNavigate()
-  const { searchFound } = useFilters()
+  const {
+    searchFound,
+    setIsOpenAddToForm,
+    isOpenAddToForm,
+    setPointToAdd,
+    pointToAdd,
+  } = useFilters()
+
+  console.log(isOpenAddToForm, pointToAdd)
 
   return (
     <Layout>
@@ -22,9 +30,19 @@ const Home = () => {
           <SearchBar />
           <SelectFilter placeholder="Filtrar por" options={[]} />
         </Filters>
-        <Modal />
+        <Modal
+          isOpen={isOpenAddToForm}
+          setModalOpen={setIsOpenAddToForm}
+          newPoint={pointToAdd}
+          setNewPoint={setPointToAdd}
+        />
       </Header>
-      <Map searchValue={searchFound} />
+      <Map
+        newPoint={pointToAdd}
+        searchValue={searchFound}
+        setModalOpen={setIsOpenAddToForm}
+        setNewPoint={setPointToAdd}
+      />
     </Layout>
   )
 }
