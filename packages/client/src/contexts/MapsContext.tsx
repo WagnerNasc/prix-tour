@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 import { LocationsData } from '../utils/types/locationTypes'
-import { points } from '../components/Marker'
+import { points } from '../components/map/Marker'
 
 interface FiltersContextType {
   searchFound: LocationsData | null

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/Layout'
-import Map from '../../components/Map'
+import Map from '../../components/map/Map'
 import Modal from '../../components/Modal'
 import SearchBar from '../../components/selects/SearchBar'
 import { Filters, Header, Logo } from './styles'

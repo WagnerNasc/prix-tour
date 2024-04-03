@@ -8,6 +8,7 @@ import {
   Button,
   ErrorDiv,
   FieldDiv,
+  FormContainer,
   FormSection,
   Input,
   Spinner,
@@ -16,7 +17,7 @@ import {
 
 import { OptionType, loadOptions } from './loadOptions'
 import { AsyncPaginate } from 'react-select-async-paginate'
-import { points } from '../Marker'
+import { points } from '../map/Marker'
 import { controlStyles, menuListStyles } from '../selects/styles'
 
 export type FormValues = z.infer<typeof schema>
@@ -77,14 +78,7 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
   }
 
   return (
-    <div
-      style={{
-        width: '30vw',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-      }}
-    >
+    <FormContainer>
       <Title>Crie uma atração</Title>
       <Formik
         initialValues={{
@@ -136,7 +130,7 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
                       value={value}
                       loadOptions={loadPageOptions}
                       styles={{
-                        control: controlStyles,
+                        control: base => controlStyles(base, '36px', '100%'),
                         menuList: menuListStyles,
                       }}
                       loadingMessage={() => 'Carregando...'}
@@ -154,14 +148,13 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
                 )}
               </Field>
               <Button type="submit" isLoading={isLoading}>
-                {' '}
                 {isLoading ? <Spinner /> : 'Cadastrar'}
               </Button>
             </FormSection>
           </form>
         )}
       </Formik>
-    </div>
+    </FormContainer>
   )
 }
 

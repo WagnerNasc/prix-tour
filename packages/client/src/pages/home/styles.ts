@@ -24,5 +24,5 @@ export const Logo = styled.img`
 
 export const Filters = styled.div`
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
 `

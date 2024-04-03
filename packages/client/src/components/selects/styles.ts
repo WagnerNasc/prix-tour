@@ -1,11 +1,15 @@
 import { CSSObjectWithLabel } from 'react-select'
 
-export const controlStyles = (baseStyles: CSSObjectWithLabel) => ({
+export const controlStyles = (
+  baseStyles: CSSObjectWithLabel,
+  height: string,
+  width: string
+) => ({
   ...baseStyles,
   fontSize: '1rem',
   fontFamily: 'Roboto',
-  width: '30vw',
-  height: '50px',
+  width: width,
+  height: height,
 
   '@media (max-width: 600px)': {
     width: '100%',

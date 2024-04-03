@@ -4,6 +4,7 @@ import { LocationsData } from '../../utils/types/locationTypes'
 import { useFilters } from '../../contexts/MapsContext'
 import Select, { OnChangeValue } from 'react-select'
 import { controlStyles, menuListStyles, placeholderStyles } from './styles'
+import { DropdownIcon } from './DropdownIcon'
 
 type Option = {
   value: LocationsData
@@ -37,6 +38,7 @@ const SearchBar = () => {
     <div>
       <Select
         placeholder={'Busca uma atração'}
+        components={{ DropdownIndicator: () => <DropdownIcon /> }}
         onChange={(option: OnChangeValue<Option, false>) =>
           handleClick(option as Option)
         }
@@ -47,7 +49,7 @@ const SearchBar = () => {
           label: option.name,
         }))}
         styles={{
-          control: controlStyles,
+          control: base => controlStyles(base, '52px', '30vw'),
           menuList: menuListStyles,
           placeholder: placeholderStyles,
         }}

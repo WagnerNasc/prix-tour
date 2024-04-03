@@ -4,6 +4,12 @@ interface ButtonProps {
   isLoading?: boolean
 }
 
+export const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`
+
 export const FormSection = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,17 +29,17 @@ export const FieldDiv = styled.div`
 `
 
 export const Input = styled.input`
-  height: 2.2rem;
+  height: 36px;
   padding: 2px 8px;
   font-size: 1rem;
   font-weight: 400;
   border: 1px solid;
-  border-color: #cccccc;
+  border-color: ${props => props.theme.colors['grey-dark']};
   border-radius: 4px;
 `
 
 export const ErrorDiv = styled.div`
-  color: red;
+  color: ${props => props.theme.colors['red-danger']};
   font-size: 0.9rem;
   justify-content: start;
 `
@@ -41,8 +47,8 @@ export const ErrorDiv = styled.div`
 export const Button = styled.button<ButtonProps>`
   border: none;
   padding: 1rem;
-  background-color: #363636;
-  color: white;
+  background-color: ${props => props.theme.colors['eclipse']};
+  color: ${props => props.theme.colors['white']};
   border-radius: 5px;
   width: 120px;
   font-weight: 700;
@@ -51,14 +57,14 @@ export const Button = styled.button<ButtonProps>`
   content: 'Cadastrar';
 
   &:hover {
-    background-color: #3f414e;
+    background-color: ${props => props.theme.colors['grey-medium']};
   }
 
   ${props =>
     props.isLoading &&
     css`
       cursor: not-allowed;
-      background-color: #363636;
+      background-color: ${props.theme.colors['eclipse']};
       animation: spin 1s linear infinite;
       content: '';
     `}
