@@ -23,7 +23,7 @@ jobs:
         run: yarn workspace server install --ignore-engines
 
       - name: Test and coverage
-        run: yarn workspace server jest --coverage
+        run: yarn workspace server jest --coverage --ignore-engines
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
