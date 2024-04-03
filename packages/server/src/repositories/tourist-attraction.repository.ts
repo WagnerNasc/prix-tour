@@ -3,6 +3,7 @@ import { TouristAttraction } from '../use-cases/interfaces/tourist-attraction-in
 import { ITouristAttractionRepository } from './interfaces/tourist-attraction-repository-interface'
 import { Optional } from '@helpers/optional'
 import { OmitProps } from '@helpers/omit'
+import { Paginated } from '@use-cases/interfaces/paginated-interface'
 
 export class TouristAttractionRepository
   implements ITouristAttractionRepository
@@ -48,10 +49,11 @@ export class TouristAttractionRepository
     }
   }
 
-  async findManyWithFilter(
-    page: number,
-    filter?: string,
-  ): Promise<{ data: TouristAttraction[]; total: number }> {
+  async findManyWithFilter({
+    page,
+    filter,
+    pageSize,
+  }: Paginated): Promise<{ data: TouristAttraction[]; total: number }> {
     try {
       let query = /* sql */ `
         SELECT
@@ -74,11 +76,11 @@ export class TouristAttractionRepository
         `
       }
 
-      const offset = (page - 1) * 10
+      const offset = (page - 1) * pageSize
 
       query += /* sql */ `
         ORDER BY created_at DESC
-        LIMIT 10
+        LIMIT ${pageSize}
         OFFSET ${offset}
       `
 
@@ -91,7 +93,7 @@ export class TouristAttractionRepository
       `
 
       const countResult = await this.pool.query(countQuery)
-      const total = parseInt(countResult.rows[0].total, 10)
+      const total = parseInt(countResult.rows[0].total, pageSize)
 
       const queryResult = await this.pool.query(query)
       const touristAttractions: TouristAttraction[] = queryResult.rows

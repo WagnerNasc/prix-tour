@@ -1,5 +1,6 @@
 import express from 'express'
 import { TouristAttractionsController } from './controllers/tourist-attractions.controller'
+import { CitiesController } from './controllers/cities.controller'
 
 const routes = express.Router()
 
@@ -28,7 +29,7 @@ routes.delete(
 
 /* City */
 
-routes.get('/cities', TouristAttractionsController.listCities)
-routes.post('/cities', TouristAttractionsController.createCity)
+routes.get('/cities', CitiesController.listCities)
+routes.post('/cities', CitiesController.createCity)
 
 export default routes

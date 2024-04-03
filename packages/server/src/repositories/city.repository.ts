@@ -1,6 +1,7 @@
 import { Pool } from 'pg'
 import { City } from '../use-cases/interfaces/city-interface'
 import { ICityRepository } from './interfaces/city-repository-interface'
+import { Paginated } from '@use-cases/interfaces/paginated-interface'
 
 export class CityRepository implements ICityRepository {
   private pool: Pool
@@ -37,10 +38,7 @@ export class CityRepository implements ICityRepository {
     }
   }
 
-  async findManyWithFilter(
-    page: number,
-    filter?: string,
-  ): Promise<{
+  async findManyWithFilter({ page, filter, pageSize }: Paginated): Promise<{
     data: City[]
     total_list: number
     total_cities: number
@@ -67,11 +65,11 @@ export class CityRepository implements ICityRepository {
         `
       }
 
-      const offset = (page - 1) * 10
+      const offset = (page - 1) * pageSize
 
       query += /* sql */ `
         ORDER BY created_at DESC
-        LIMIT 10
+        LIMIT ${pageSize}
         OFFSET ${offset}
       `
 
@@ -92,7 +90,7 @@ export class CityRepository implements ICityRepository {
 
       const countTotalList = await this.pool.query(countTotalListQuery)
       const countTotalCities = await this.pool.query(countQueryTotalCities)
-      const totalList = parseInt(countTotalList.rows[0].total_list, 10)
+      const totalList = parseInt(countTotalList.rows[0].total_list, pageSize)
       const totalCities = parseInt(countTotalCities.rows[0].total_cities)
 
       const queryResult = await this.pool.query(query)
@@ -102,7 +100,7 @@ export class CityRepository implements ICityRepository {
         data: cities,
         total_list: totalList,
         total_cities: totalCities,
-        total_pages: totalCities / 10,
+        total_pages: totalCities / pageSize,
       }
     } catch (error) {
       console.error('Error to list cities:', error)

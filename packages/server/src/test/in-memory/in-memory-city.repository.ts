@@ -1,5 +1,6 @@
 import { ICityRepository } from '@repositories/interfaces/city-repository-interface'
 import { City } from '@use-cases/interfaces/city-interface'
+import { Paginated } from '@use-cases/interfaces/paginated-interface'
 
 export interface CityDB extends City {
   updatedAt?: Date | null
@@ -22,10 +23,7 @@ export class InMemoryCityRepository implements ICityRepository {
     return city
   }
 
-  async findManyWithFilter(
-    page: number,
-    filter?: string | undefined,
-  ): Promise<{
+  async findManyWithFilter({ page, filter, pageSize }: Paginated): Promise<{
     data: City[]
     total_list: number
     total_cities: number
@@ -33,14 +31,14 @@ export class InMemoryCityRepository implements ICityRepository {
   }> {
     const cities = this.items
       .filter((item) => item.deletedAt === null)
-      .slice((page - 1) * 10, page * 10)
+      .slice((page - 1) * pageSize, page * pageSize)
 
     if (!filter) {
       return {
         data: cities,
         total_list: cities.length,
         total_cities: this.items.length,
-        total_pages: this.items.length / 10,
+        total_pages: this.items.length / pageSize,
       }
     }
 

@@ -2,9 +2,6 @@
   "name": "server",
   "version": "1.0.1",
   "main": "index.js",
-  "engines": {
-    "node": "20.10"
-  },
   "scripts": {
     "start": "npx nodemon",
     "build": "node build/server.js",

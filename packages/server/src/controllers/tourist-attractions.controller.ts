@@ -1,34 +1,36 @@
 import { makeFetchTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-fetch-tourist-attraction'
 import {
+  BadRequest,
   CityNotFound,
-  InternalServer,
   TouristAttractionNotFound,
 } from '@use-cases/errors'
-import { makeCreateCityUseCase } from '../use-cases/factories/city/make-create-city'
 import { makeCreateTouristAttractionUseCase } from '../use-cases/factories/tourist-attraction/make-create-tourist-attraction'
 import { makeListTouristAttractionsUseCase } from '@use-cases/factories/tourist-attraction/make-list-tourist-attractions'
 import { Request, Response } from 'express'
 import { ZodError, z } from 'zod'
 import { makeUpdateTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-update-tourist-attraction'
 import { makeInvalidTouristAttractionUseCase } from '@use-cases/factories/tourist-attraction/make-invalid-tourist-attraction'
-import { makeListCitiesUseCase } from '@use-cases/factories/tourist-attraction/make-list-cities'
 
 export class TouristAttractionsController {
   static async listTouristAttractions(req: Request, res: Response) {
     try {
       const listTouristAttractionQuerySchema = z.object({
         filter: z.string().optional(),
-        page: z.coerce.number().min(1).default(1),
+        page: z.coerce.number().default(1),
+        limit: z.coerce.number().default(10),
       })
 
-      const { filter, page } = listTouristAttractionQuerySchema.parse(req.query)
+      const { filter, page, limit } = listTouristAttractionQuerySchema.parse(
+        req.query,
+      )
       const listTouristAttractionsUseCase = makeListTouristAttractionsUseCase()
       const touristAttractions = await listTouristAttractionsUseCase.execute({
         filter,
         page,
+        pageSize: limit,
       })
 
-      return res.json(touristAttractions)
+      return res.status(200).json(touristAttractions)
     } catch (error) {
       if (error instanceof ZodError) {
         return res
@@ -36,8 +38,7 @@ export class TouristAttractionsController {
           .json({ message: 'Validation error.', issues: error.issues })
       }
 
-      res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
+      return res.status(500).json({ message: 'Internal server error.' })
     }
   }
 
@@ -60,8 +61,7 @@ export class TouristAttractionsController {
         return res.status(404).send({ message: error.message })
       }
 
-      res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
+      return res.status(500).json({ message: 'Internal server error.' })
     }
   }
 
@@ -90,7 +90,7 @@ export class TouristAttractionsController {
         imageLink,
       })
 
-      res.status(200).json({
+      return res.status(204).json({
         message: 'updated successfully.',
       })
     } catch (error) {
@@ -98,8 +98,7 @@ export class TouristAttractionsController {
         return res.status(404).send({ message: error.message })
       }
 
-      res.status(500).json({ message: 'Internal server error.' })
-      throw error
+      return res.status(500).json({ message: 'Internal server error.' })
     }
   }
 
@@ -115,7 +114,7 @@ export class TouristAttractionsController {
 
       await invalidTouristAttractionByIdUseCase.execute(id)
 
-      res.status(200).json({
+      return res.status(204).json({
         message: 'deleted successfully.',
       })
     } catch (error) {
@@ -123,8 +122,7 @@ export class TouristAttractionsController {
         return res.status(404).send({ message: error.message })
       }
 
-      res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
+      return res.status(500).json({ message: 'Internal server error.' })
     }
   }
 
@@ -158,10 +156,10 @@ export class TouristAttractionsController {
         imageLink,
       })
 
-      res.status(200).json({
+      return res.status(201).json({
         message: 'created successfully.',
       })
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof CityNotFound) {
         return res.status(409).send({ message: error.message })
       }
@@ -172,70 +170,13 @@ export class TouristAttractionsController {
           .json({ message: 'Validation error.', issues: error.issues })
       }
 
-      res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
-    }
-  }
-
-  static async listCities(req: Request, res: Response) {
-    try {
-      const citiesQuerySchema = z.object({
-        filter: z.string().optional(),
-        page: z.coerce.number().min(1).default(1),
-      })
-
-      const { filter, page } = citiesQuerySchema.parse(req.query)
-      const citiesUseCase = makeListCitiesUseCase()
-      const cities = await citiesUseCase.execute({
-        filter,
-        page,
-      })
-
-      return res.json(cities)
-    } catch (error) {
-      if (error instanceof ZodError) {
-        return res
-          .status(400)
-          .json({ message: 'Validation error.', issues: error.issues })
+      if (error instanceof BadRequest) {
+        return res.status(400).json({
+          message: error.message,
+        })
       }
 
-      res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
-    }
-  }
-
-  static async createCity(req: Request, res: Response) {
-    try {
-      const createCityBodySchema = z.object({
-        name: z.string(),
-        stateId: z.string(),
-        isCapital: z.coerce.boolean(),
-        population: z.coerce.number(),
-        populationProper: z.coerce.number(),
-        latitude: z.coerce.number().refine((value) => {
-          return Math.abs(value) <= 90
-        }),
-        longitude: z.coerce.number().refine((value) => {
-          return Math.abs(value) <= 180
-        }),
-      })
-
-      const createCity = createCityBodySchema.parse(req.body)
-      const createCityUseCase = makeCreateCityUseCase()
-      await createCityUseCase.execute(createCity)
-
-      res.status(200).json({
-        message: 'created successfully.',
-      })
-    } catch (error) {
-      if (error instanceof ZodError) {
-        return res
-          .status(400)
-          .json({ message: 'Validation error.', issues: error.issues })
-      }
-
-      res.status(500).json({ message: 'Internal server error.' })
-      throw new InternalServer()
+      return res.status(500).json({ message: 'Internal server error.' })
     }
   }
 }

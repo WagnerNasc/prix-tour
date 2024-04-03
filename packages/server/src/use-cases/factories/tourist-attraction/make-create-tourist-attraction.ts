@@ -5,10 +5,10 @@ export function makeCreateTouristAttractionUseCase() {
   const touristAttractionRepository =
     RepositoryFactory.makeTouristAttractionRepository()
   const cityRepository = RepositoryFactory.makeCityRepository()
-  const listTouristAttractionUseCase = new CreateTouristAttractionUseCase(
+  const createTouristAttractionUseCase = new CreateTouristAttractionUseCase(
     touristAttractionRepository,
     cityRepository,
   )
 
-  return listTouristAttractionUseCase
+  return createTouristAttractionUseCase
 }

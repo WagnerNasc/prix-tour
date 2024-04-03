@@ -26,6 +26,7 @@ describe('List Tourist Attraction', () => {
     )
     const { data } = await sut.execute({
       page: 1,
+      pageSize: 10,
     })
 
     expect(data).toEqual([
@@ -45,6 +46,7 @@ describe('List Tourist Attraction', () => {
 
     const { data } = await sut.execute({
       page: 2,
+      pageSize: 10,
     })
 
     expect(data).toHaveLength(2)
