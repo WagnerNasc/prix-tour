@@ -17,17 +17,17 @@ export class TouristAttractionsController {
       const listTouristAttractionQuerySchema = z.object({
         filter: z.string().optional(),
         page: z.coerce.number().default(1),
-        pageSize: z.coerce.number().default(10),
+        limit: z.coerce.number().default(10),
       })
 
-      const { filter, page, pageSize } = listTouristAttractionQuerySchema.parse(
+      const { filter, page, limit } = listTouristAttractionQuerySchema.parse(
         req.query,
       )
       const listTouristAttractionsUseCase = makeListTouristAttractionsUseCase()
       const touristAttractions = await listTouristAttractionsUseCase.execute({
         filter,
         page,
-        pageSize,
+        pageSize: limit,
       })
 
       return res.status(200).json(touristAttractions)

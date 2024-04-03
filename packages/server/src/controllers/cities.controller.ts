@@ -9,15 +9,15 @@ export class CitiesController {
       const citiesQuerySchema = z.object({
         filter: z.string().optional(),
         page: z.coerce.number().default(1),
-        pageSize: z.coerce.number().default(10),
+        limit: z.coerce.number().default(10),
       })
 
-      const { filter, page, pageSize } = citiesQuerySchema.parse(req.query)
+      const { filter, page, limit } = citiesQuerySchema.parse(req.query)
       const citiesUseCase = makeListCitiesUseCase()
       const cities = await citiesUseCase.execute({
         filter,
         page,
-        pageSize,
+        pageSize: limit,
       })
 
       return res.json(cities)
