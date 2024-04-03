@@ -40,7 +40,7 @@ export class CitiesController {
         isCapital: z.coerce.boolean(),
         population: z.coerce.number(),
         populationProper: z.coerce.number(),
-        latitude: z.coerce.number().refine(value => {
+        latitude: z.coerce.number().refine((value) => {
           return Math.abs(value) <= 90
         }),
         longitude: z.coerce.number().refine((value) => {
