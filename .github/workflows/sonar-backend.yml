@@ -2,9 +2,12 @@ name: Sonarqube Backend
 
 on:
   push:
+    paths:
+      - 'packages/server/**'
+      - '.github/workflows/**'
     branches:
       - main
-      
+
   pull_request:
     paths:
       - 'packages/server/**'
