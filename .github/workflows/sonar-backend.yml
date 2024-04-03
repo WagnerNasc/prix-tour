@@ -20,10 +20,10 @@ jobs:
           fetch-depth: 0
       
       - name: Install modules
-        run: yarn workspace server install --ignore-engines
+        run: yarn workspace server install
 
       - name: Test and coverage
-        run: yarn workspace server jest --coverage --ignore-engines
+        run: yarn workspace server jest --coverage
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
