@@ -1,7 +1,8 @@
 import { Box, Button, Grommet, Layer, ThemeType } from 'grommet'
-import React from 'react'
+import React, { useMemo } from 'react'
 import Forms from './forms/forms'
 import styled from 'styled-components'
+import { points } from './Marker'
 
 const customTheme: ThemeType = {
   button: {
@@ -25,8 +26,19 @@ const FormSection = styled.div`
   padding: 1.5rem;
 `
 
-const Modal = () => {
+interface ModalProps {
+  isOpen: boolean
+  newPoint?: points
+  setNewPoint?: React.Dispatch<React.SetStateAction<points>>
+  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Modal = ({ isOpen, newPoint, setNewPoint, setModalOpen }: ModalProps) => {
   const [show, setShow] = React.useState(false)
+
+  useMemo(() => {
+    setShow(isOpen)
+  }, [isOpen])
   return (
     <Grommet theme={customTheme}>
       <Box>
@@ -40,10 +52,17 @@ const Modal = () => {
         {show && (
           <Layer
             onEsc={() => setShow(false)}
-            onClickOutside={() => setShow(false)}
+            onClickOutside={() => {
+              setNewPoint?.({ key: '', lat: 0, lng: 0 })
+              setModalOpen?.(false)
+              setShow(false)
+            }}
           >
             <FormSection>
-              <Forms />
+              <Forms
+                newPoint={newPoint}
+                isModalOpen={isOpen => setModalOpen?.(isOpen)}
+              />
             </FormSection>
           </Layer>
         )}
