@@ -8,6 +8,7 @@ import {
   Button,
   ErrorDiv,
   FieldDiv,
+  FormContainer,
   FormSection,
   Input,
   Spinner,
@@ -16,9 +17,18 @@ import {
 
 import { OptionType, loadOptions } from './loadOptions'
 import { AsyncPaginate } from 'react-select-async-paginate'
-import { points } from '../Marker'
+import { points } from '../map/Marker'
+import { controlStyles, menuListStyles } from '../selects/styles'
 
 export type FormValues = z.infer<typeof schema>
+interface FormsProps {
+  newPoint?: points
+  isModalOpen?: (isOpen: boolean) => void
+}
+
+type AdditionalType = {
+  page: number
+}
 
 const validateForm = (values: FormValues) => {
   try {
@@ -28,11 +38,6 @@ const validateForm = (values: FormValues) => {
       return error.formErrors.fieldErrors
     }
   }
-}
-
-interface FormsProps {
-  newPoint?: points
-  isModalOpen?: (isOpen: boolean) => void
 }
 
 const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
@@ -50,10 +55,6 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
       setNewPoint(newPoint)
     }
   }, [newPoint])
-
-  type AdditionalType = {
-    page: number
-  }
 
   const defaultAdditional: AdditionalType = {
     page: 1,
@@ -77,14 +78,7 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
   }
 
   return (
-    <div
-      style={{
-        width: '30vw',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-      }}
-    >
+    <FormContainer>
       <Title>Crie uma atração</Title>
       <Formik
         initialValues={{
@@ -98,7 +92,7 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
         onSubmit={values => {
           try {
             setIsLoading(true)
-            PostAttraction(values)
+            PostAttraction('/tourist-attractions', values)
             setTimeout(() => {
               setIsLoading(false)
             }, 1000)
@@ -122,6 +116,11 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
                     name={field.field}
                     placeholder={field.label}
                     label={field.label}
+                    disabled={
+                      newPoint?.key &&
+                      (field.field === 'latitude' ||
+                        field.field === 'longitude')
+                    }
                   />
                   <ErrorMessage name={field.field} component={ErrorDiv} />
                 </FieldDiv>
@@ -136,16 +135,8 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
                       value={value}
                       loadOptions={loadPageOptions}
                       styles={{
-                        control: baseStyles => ({
-                          ...baseStyles,
-                          fontSize: '1rem',
-                          fontFamily: 'Roboto',
-                          height: 35,
-                        }),
-                        menuList: baseStyles => ({
-                          ...baseStyles,
-                          height: '200px',
-                        }),
+                        control: base => controlStyles(base, '36px', '100%'),
+                        menuList: menuListStyles,
                       }}
                       loadingMessage={() => 'Carregando...'}
                       onChange={(selectedOption: OptionType | null) => {
@@ -162,14 +153,13 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
                 )}
               </Field>
               <Button type="submit" isLoading={isLoading}>
-                {' '}
                 {isLoading ? <Spinner /> : 'Cadastrar'}
               </Button>
             </FormSection>
           </form>
         )}
       </Formik>
-    </div>
+    </FormContainer>
   )
 }
 

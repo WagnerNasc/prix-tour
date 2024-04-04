@@ -1,21 +1,12 @@
 export const defaultTheme = {
-  white: '#fff',
+  colors: {
+    white: '#ECF0F1',
+    eclipse: '#363636',
+    bluebell: '#341F97',
 
-  'gray-100': '#E1E1E6',
-  'gray-300': '#C4C4CC',
-  'gray-400': '#8D8D99',
-  'gray-500': '#7C7C8A',
-  'gray-600': '#323238',
-  'gray-700': '#29292E',
-  'gray-800': '#ECF0F1',
-  'gray-900': '#121214',
+    'grey-medium': '#3f414e',
+    'grey-dark': '#cccccc',
 
-  'blue-300': '#3C7AE5',
-  'blue-500': '#2E71E8',
-  'blue-700': '#1B1EC7',
-  'blue-logo': '#467087',
-
-  'red-300': '#F75A68',
-  'red-500': '#AB222E',
-  'red-700': '#7A1921',
+    'red-danger': '#E74C3C',
+  },
 } as const

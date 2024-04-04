@@ -3,9 +3,10 @@ import type { Marker } from '@googlemaps/markerclusterer'
 import { MarkerClusterer } from '@googlemaps/markerclusterer'
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { FaMapMarkerAlt } from 'react-icons/fa'
-import { LocationsData } from '../utils/types/locationTypes'
-import { contentInfo } from './ContentInfoWindow'
-import { useOnClickOutside } from '../utils/hooks/onClickOutside'
+import { LocationsData } from '../../utils/types/locationTypes'
+import { contentInfo } from '../ContentInfoWindow'
+import { useOnClickOutside } from '../../utils/hooks/onClickOutside'
+import { MarkerIcon } from './styles'
 
 export type points = { lat: number; lng: number } & {
   key: string
@@ -74,9 +75,9 @@ const Markers = ({ points }: MarkerProps) => {
           ref={marker => setMarkerRef(marker, point.key)}
           onClick={() => handleMarkerClick(point)}
         >
-          <span style={{ fontSize: '2rem', color: '#341F97' }}>
+          <MarkerIcon>
             <FaMapMarkerAlt />
-          </span>
+          </MarkerIcon>
         </AdvancedMarker>
       ))}
       {selectedMarker && infowindowShown && (

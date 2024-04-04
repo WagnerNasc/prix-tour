@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
 import { APIProvider, Map, MapMouseEvent } from '@vis.gl/react-google-maps'
 import Markers, { points } from './Marker'
-import { LocationsData } from '../utils/types/locationTypes'
-import { getAll } from '../api/handleGetAll'
+import { LocationsData } from '../../utils/types/locationTypes'
+import { getAll } from '../../api/handleGetAll'
+import { MapContainer } from './styles'
 
 type MapComponentProps = {
   searchValue: LocationsData | null
@@ -32,6 +32,7 @@ const MapComponent = ({
     }))
     setPoints(spacial)
   }
+
   const extractPoints = async () => {
     try {
       const pointsGet: LocationsData[] = await getAll(
@@ -71,27 +72,14 @@ const MapComponent = ({
     return { lat: lastPoint.lat, lng: lastPoint.lng }
   }, [points])
 
-  const MapContainer = styled.div`
-    height: 80vh;
-  `
-
   const onMapClick = (e: MapMouseEvent) => {
     if (e.detail.latLng) {
-      setPoints(current => [
-        ...current,
-        {
-          lat: e.detail.latLng?.lat ?? 0,
-          lng: e.detail.latLng?.lng ?? 0,
-          key: `new-point-${current?.length}`,
-        },
-      ])
       setNewPoint({
         lat: e.detail.latLng?.lat ?? 0,
         lng: e.detail.latLng?.lng ?? 0,
         key: `new-point-${points?.length}`,
       })
       setModalOpen(true)
-      // setPoints(current => current.slice(0, -1))
     }
   }
 

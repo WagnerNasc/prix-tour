@@ -1,29 +1,37 @@
-import { Box, Button, Grommet, Layer, ThemeType } from 'grommet'
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 import Forms from './forms/forms'
 import styled from 'styled-components'
-import { points } from './Marker'
-
-const customTheme: ThemeType = {
-  button: {
-    size: {
-      large: {
-        border: {
-          radius: '5px',
-        },
-      },
-    },
-
-    hover: {
-      background: '#3f414e',
-    },
-  },
-}
+import { points } from './map/Marker'
+import { Button } from './Button'
+import { useOnClickOutside } from '../utils/hooks/onClickOutside'
+import { device } from '../styles/breakpoints'
 
 const FormSection = styled.div`
-  max-width: 40vw;
   max-height: 100%;
   padding: 1.5rem;
+  background-color: ${props => props.theme.colors.white};
+  border-radius: 5px;
+`
+
+const ModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+`
+
+const StyledDiv = styled.div`
+  width: 30%;
+
+  @media ${device.sm} {
+    width: 80%;
+  }
 `
 
 interface ModalProps {
@@ -34,40 +42,33 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, newPoint, setNewPoint, setModalOpen }: ModalProps) => {
-  const [show, setShow] = React.useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
   useMemo(() => {
-    setShow(isOpen)
+    setModalOpen?.(isOpen)
   }, [isOpen])
+
+  useOnClickOutside(ref, () => {
+    setNewPoint?.({ key: '', lat: 0, lng: 0 })
+    setModalOpen?.(false)
+  })
+
   return (
-    <Grommet theme={customTheme}>
-      <Box>
-        <Button
-          primary
-          label="+"
-          color={'#363636'}
-          size="large"
-          onClick={() => setShow(true)}
-        />
-        {show && (
-          <Layer
-            onEsc={() => setShow(false)}
-            onClickOutside={() => {
-              setNewPoint?.({ key: '', lat: 0, lng: 0 })
-              setModalOpen?.(false)
-              setShow(false)
-            }}
-          >
+    <div>
+      <Button onClick={() => setModalOpen?.(true)}>+</Button>
+      {isOpen && (
+        <ModalContainer>
+          <StyledDiv ref={ref}>
             <FormSection>
               <Forms
                 newPoint={newPoint}
                 isModalOpen={isOpen => setModalOpen?.(isOpen)}
               />
             </FormSection>
-          </Layer>
-        )}
-      </Box>
-    </Grommet>
+          </StyledDiv>
+        </ModalContainer>
+      )}
+    </div>
   )
 }
 
