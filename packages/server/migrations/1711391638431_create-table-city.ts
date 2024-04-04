@@ -5,9 +5,16 @@ export const shorthands: ColumnDefinitions | undefined = undefined
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
   pgm.createTable('city', {
-    id: { type: 'uuid', primaryKey: true, notNull: true },
+    id: {
+      type: 'uuid',
+      primaryKey: true,
+      notNull: true,
+    },
     name: { type: 'varchar(100)', notNull: true },
-    state_id: { type: 'uuid', notNull: true },
+    state_id: {
+      type: 'uuid',
+      notNull: true,
+    },
     is_capital: { type: 'bool', default: false },
     latitude: { type: 'numeric(9,6)', notNull: true },
     longitude: { type: 'numeric(9,6)', notNull: true },
@@ -20,12 +27,12 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
   pgm.createConstraint(
     {
       schema: 'public',
-      name: 'state',
+      name: 'city',
     },
-    'state_id_fk',
+    'city_state_id_fk',
     {
       foreignKeys: {
-        columns: 'id',
+        columns: 'state_id',
         references: 'public.state(id)',
       },
     },

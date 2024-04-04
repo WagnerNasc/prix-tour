@@ -5,7 +5,11 @@ export const shorthands: ColumnDefinitions | undefined = undefined
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
   pgm.createTable('country', {
-    id: { type: 'uuid', primaryKey: true, notNull: true },
+    id: {
+      type: 'uuid',
+      primaryKey: true,
+      notNull: true,
+    },
     name: { type: 'varchar(70)', notNull: true },
     code: { type: 'bpchar(2)', notNull: true },
     update_at: { type: 'timestamp' },

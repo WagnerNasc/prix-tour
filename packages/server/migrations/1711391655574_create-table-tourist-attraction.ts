@@ -5,12 +5,14 @@ export const shorthands: ColumnDefinitions | undefined = undefined
 
 export async function up(pgm: MigrationBuilder): Promise<void> {
   pgm.createTable('tourist_attraction', {
-    id: { type: 'uuid', primaryKey: true, notNull: true },
+    id: {
+      type: 'uuid',
+      primaryKey: true,
+      notNull: true,
+    },
     city_id: {
       type: 'uuid',
       notNull: true,
-      references: '"city"',
-      onDelete: 'CASCADE',
     },
     name: { type: 'varchar(255)', notNull: true },
     description: { type: 'text', notNull: true },
@@ -20,6 +22,20 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
     created_at: { type: 'timestamp', default: pgm.func('current_timestamp') },
     deleted_at: { type: 'timestamp' },
   })
+
+  pgm.createConstraint(
+    {
+      schema: 'public',
+      name: 'tourist_attraction',
+    },
+    'tourist_attraction_city_id_fk',
+    {
+      foreignKeys: {
+        columns: 'city_id',
+        references: 'public.city(id)',
+      },
+    },
+  )
 
   pgm.createIndex('tourist_attraction', 'city_id')
 }
