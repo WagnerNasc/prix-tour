@@ -1,6 +1,6 @@
 -- Country
 
-INSERT INTO country (id, code, name) VALUES ('311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B', 'BR', 'Brasil');
+INSERT INTO country (id, code, name) VALUES ('311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b', 'BR', 'Brasil');
 
 commit;
 
@@ -8,35 +8,37 @@ commit;
 
 INSERT INTO state (id, code, name, country_id) 
 VALUES 
-  ('983d2020-c319-4761-896c-c6d5c294d4ac', 'RO', 'Rondônia', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('9d359e0f-5027-44af-a048-2d1066e404dd', 'AC', 'Acre', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('a6b34154-2648-4ba5-85a0-35c9ecf07e98', 'AM', 'Amazonas', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('33e9844f-7fc4-45d6-afc6-0e264bcf15a7', 'RR', 'Roraima', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('18f22f98-971e-44fe-81d1-930394ca6de9', 'PA', 'Pará', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('3c3ecb05-a11d-4eb3-b36f-ed48cd5b489b', 'AP', 'Amapá', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('ee5b57c2-1e0e-42dd-8507-71235f564a9f', 'TO', 'Tocantins', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('ac2546a2-0de5-42db-95bc-dcb9ecd7c4ae', 'MA', 'Maranhão', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('7d976b65-b018-47bc-9fee-53f3bd383728', 'PI', 'Piauí', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('0f7ffe62-79ba-40d9-9ab7-e021482b1b78', 'CE', 'Ceará', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('4cf407cc-e307-4f39-ad09-72aa9b20d7f9', 'RN', 'Rio Grande do Norte', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('df02aefd-e4ad-403e-b543-31d959f76f84', 'PB', 'Paraíba', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('bda18610-6d6c-4103-9984-6d191d2d2a01', 'PE', 'Pernambuco', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('bfdd0fcb-e77c-48f3-8b09-27919a259e68', 'AL', 'Alagoas', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('99bd7b71-20e0-4883-a010-eb1ccdd5dfb4', 'SE', 'Sergipe', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('b0e50554-a965-437b-b02c-c626f717944a', 'BA', 'Bahia', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('a57b9c12-9a46-4ce1-a8f5-9628fa8b0ae9', 'MG', 'Minas Gerais', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('7f5f153e-ead0-44b7-87a3-6af46d9f0b65', 'ES', 'Espírito Santo', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('511560e4-aa3a-4a89-9dd8-8206f25871d7', 'RJ', 'Rio de Janeiro', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('601b27d8-841a-4945-a31a-08376978003e', 'SP', 'São Paulo', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('f541db17-f610-4cbb-9214-dd2e725bc6ed', 'PR', 'Paraná', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('f4d2a33b-2f2a-4f0b-9b75-9e552b5a17c2', 'SC', 'Santa Catarina', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('16fd7756-403d-44f7-b094-c587d7f469e0', 'RS', 'Rio Grande do Sul', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('fbb38f9b-5d37-45ad-939c-d8dabc3c447c', 'MS', 'Mato Grosso do Sul', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('31e04d47-2929-49ad-8c02-6a76a98ebd0e', 'MT', 'Mato Grosso', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('a4064122-720d-4198-80e5-9e7de773252f', 'GO', 'Goiás', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B'),
-  ('dbd3d34e-4d9f-4c3a-b6e8-abe09a0dd048', 'DF', 'Distrito Federal', '311AD7AA-FFC8-4F7C-8FA9-226D6A9B442B');
-  
- -- City
+  ('983d2020-c319-4761-896c-c6d5c294d4ac', 'RO', 'Rondônia', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('9d359e0f-5027-44af-a048-2d1066e404dd', 'AC', 'Acre', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('a6b34154-2648-4ba5-85a0-35c9ecf07e98', 'AM', 'Amazonas', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('33e9844f-7fc4-45d6-afc6-0e264bcf15a7', 'RR', 'Roraima', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('18f22f98-971e-44fe-81d1-930394ca6de9', 'PA', 'Pará', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('3c3ecb05-a11d-4eb3-b36f-ed48cd5b489b', 'AP', 'Amapá', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('ee5b57c2-1e0e-42dd-8507-71235f564a9f', 'TO', 'Tocantins', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('ac2546a2-0de5-42db-95bc-dcb9ecd7c4ae', 'MA', 'Maranhão', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('7d976b65-b018-47bc-9fee-53f3bd383728', 'PI', 'Piauí', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('0f7ffe62-79ba-40d9-9ab7-e021482b1b78', 'CE', 'Ceará', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('4cf407cc-e307-4f39-ad09-72aa9b20d7f9', 'RN', 'Rio Grande do Norte', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('df02aefd-e4ad-403e-b543-31d959f76f84', 'PB', 'Paraíba', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('bda18610-6d6c-4103-9984-6d191d2d2a01', 'PE', 'Pernambuco', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('bfdd0fcb-e77c-48f3-8b09-27919a259e68', 'AL', 'Alagoas', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('99bd7b71-20e0-4883-a010-eb1ccdd5dfb4', 'SE', 'Sergipe', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('b0e50554-a965-437b-b02c-c626f717944a', 'BA', 'Bahia', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('a57b9c12-9a46-4ce1-a8f5-9628fa8b0ae9', 'MG', 'Minas Gerais', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('7f5f153e-ead0-44b7-87a3-6af46d9f0b65', 'ES', 'Espírito Santo', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('511560e4-aa3a-4a89-9dd8-8206f25871d7', 'RJ', 'Rio de Janeiro', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('601b27d8-841a-4945-a31a-08376978003e', 'SP', 'São Paulo', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('f541db17-f610-4cbb-9214-dd2e725bc6ed', 'PR', 'Paraná', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('f4d2a33b-2f2a-4f0b-9b75-9e552b5a17c2', 'SC', 'Santa Catarina', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('16fd7756-403d-44f7-b094-c587d7f469e0', 'RS', 'Rio Grande do Sul', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('fbb38f9b-5d37-45ad-939c-d8dabc3c447c', 'MS', 'Mato Grosso do Sul', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('31e04d47-2929-49ad-8c02-6a76a98ebd0e', 'MT', 'Mato Grosso', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('a4064122-720d-4198-80e5-9e7de773252f', 'GO', 'Goiás', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b'),
+  ('dbd3d34e-4d9f-4c3a-b6e8-abe09a0dd048', 'DF', 'Distrito Federal', '311ad7aa-ffc8-4f7c-8fa9-226d6a9b442b');
+
+commit;
+
+-- City
  
  INSERT INTO city (id, name, latitude, longitude, is_capital, state_id) 
 VALUES 
@@ -5611,9 +5613,9 @@ VALUES
  ('b468c57d-bc52-4991-8d42-728d2d78e138', 'Zé Doca', -3.27014, -45.6553, false, 'ac2546a2-0de5-42db-95bc-dcb9ecd7c4ae'),
  ('6a2ff9f8-f0d9-41a1-8979-2b6b71be34cc', 'Zortéa', -27.4521, -51.552, false, 'f4d2a33b-2f2a-4f0b-9b75-9e552b5a17c2');
 
- commit;
- 
- -- Tourist Attraction
+commit;
+
+-- Tourist Attraction
 
 INSERT INTO tourist_attraction (id, city_id, name, image_link, description, latitude, longitude)
 VALUES
@@ -5625,7 +5627,7 @@ VALUES
 ('4d4f7425-0444-40d2-8e42-150f39df9b4b', '023c075e-ff47-4773-84a6-81cdb4de04ae', 'Mercado Modelo', 'https://unsplash.com/photos/a-view-of-a-harbor-with-boats-in-the-water-xpczLXmqcxE', 'Um mercado histórico com lojas de artesanato, restaurantes e bares, oferecendo uma ampla variedade de produtos locais.', -12.9680, -38.5087),
 ('3fb9ec8d-e2a2-47cb-8edf-1e58d78f75b8', 'c437391c-60e2-4041-8cab-2e52f71e6527', 'Lagoa da Conceição', 'https://unsplash.com/photos/brown-long-coated-dog-on-brown-wooden-bridge-during-daytime-tfknL5nzF7g', 'Uma lagoa cercada por morros, dunas e uma vila de pescadores, oferecendo atividades como windsurf, kitesurf, caiaque e passeios de barco.', -27.6146, -48.4514),
 ('ea02b125-97d9-4a22-8b09-8338587d0a79', 'c437391c-60e2-4041-8cab-2e52f71e6527', 'Praia Mole', 'https://unsplash.com/photos/beach-at-sunset-KemUDEb6FvY', 'Uma praia famosa por suas ondas fortes, frequentada por surfistas, e cercada por dunas e trilhas.', -27.6297, -48.4445),
-('70f485e7-7ad7-44e8-8ba8-ee77f4374c36', 'c437391c-60e2-4041-8cab-2e52f71e6527', 'Mercado Público de Florianópolis', 'https://lh5.googleusercontent.com/p/AF1QipPwp_capTa7v2ftZRR_QeAZnhjK5mYCse-X2Z-9=s745-p-k', 'Um mercado público histórico com barracas de comida, lojas de artesanato, apresentações musicais e uma variedade de produtos regionais.', -27.5986, -48.5510);
-('d917e3b4-e177-4393-be34-7a5acdb542a4', '601b27d8-841a-4945-a31a-08376978003e', 'Praça do H', 'https://lh5.googleusercontent.com/p/AF1QipMiD0PEXxQOsxt1UI6e7bLhs9tu2qa1H1j8bIhL=w203-h270-k', 'Praça de uma letra', -23.9512764, -46.4547226);
+('70f485e7-7ad7-44e8-8ba8-ee77f4374c36', 'c437391c-60e2-4041-8cab-2e52f71e6527', 'Mercado Público de Florianópolis', 'https://lh5.googleusercontent.com/p/AF1QipPwp_capTa7v2ftZRR_QeAZnhjK5mYCse-X2Z-9=s745-p-k', 'Um mercado público histórico com barracas de comida, lojas de artesanato, apresentações musicais e uma variedade de produtos regionais.', -27.5986, -48.5510),
+('d917e3b4-e177-4393-be34-7a5acdb542a4', 'e385a6c6-c1e0-48e0-9337-089fb09ab21f', 'Praça do H', 'https://lh5.googleusercontent.com/p/AF1QipMiD0PEXxQOsxt1UI6e7bLhs9tu2qa1H1j8bIhL=w203-h270-k', 'Praça de uma letra', -23.9512764, -46.4547226);
 
 commit;
