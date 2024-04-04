@@ -1,6 +1,12 @@
 name: Sonarqube Frontend
 
 on:
+  push:
+    paths:
+      - 'packages/server/**'
+    branches:
+      - main
+
   pull_request:
     paths:
       - 'packages/client/**'
