@@ -12,7 +12,6 @@ type Option = {
 }
 
 const SearchBar = () => {
-  const [, setSearchValue] = React.useState('')
   const [options, setOptions] = React.useState<LocationsData[]>([])
 
   const { setSearchFound = () => null } = useFilters()
@@ -24,14 +23,12 @@ const SearchBar = () => {
   }
 
   const handleChange = (newValue: string) => {
-    setSearchValue(newValue)
     handleData(newValue)
   }
 
   const handleClick = (option: Option) => {
     setOptions([])
     setSearchFound(option.value)
-    setSearchValue(option.label)
   }
 
   return (
