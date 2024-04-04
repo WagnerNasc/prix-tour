@@ -35,26 +35,24 @@ const SearchBar = () => {
   }
 
   return (
-    <div>
-      <Select
-        placeholder={'Busca uma atração'}
-        components={{ DropdownIndicator: () => <DropdownIcon /> }}
-        onChange={(option: OnChangeValue<Option, false>) =>
-          handleClick(option as Option)
-        }
-        onInputChange={e => handleChange(e)}
-        noOptionsMessage={() => 'Nenhum resultado encontrado'}
-        options={options?.map(option => ({
-          value: option,
-          label: option.name,
-        }))}
-        styles={{
-          control: base => controlStyles(base, '52px', '30vw'),
-          menuList: menuListStyles,
-          placeholder: placeholderStyles,
-        }}
-      />
-    </div>
+    <Select
+      placeholder={'Busca uma atração'}
+      components={{ DropdownIndicator: () => <DropdownIcon /> }}
+      onChange={(option: OnChangeValue<Option, false>) =>
+        handleClick(option as Option)
+      }
+      onInputChange={e => handleChange(e)}
+      noOptionsMessage={() => 'Nenhum resultado encontrado'}
+      options={options?.map(option => ({
+        value: option,
+        label: option.name,
+      }))}
+      styles={{
+        control: base => controlStyles(base, '56px', '30vw'),
+        menuList: menuListStyles,
+        placeholder: placeholderStyles,
+      }}
+    />
   )
 }
 

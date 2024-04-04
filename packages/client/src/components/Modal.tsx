@@ -42,23 +42,21 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, newPoint, setNewPoint, setModalOpen }: ModalProps) => {
-  const [show, setShow] = React.useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useMemo(() => {
-    setShow(isOpen)
+    setModalOpen?.(isOpen)
   }, [isOpen])
 
   useOnClickOutside(ref, () => {
     setNewPoint?.({ key: '', lat: 0, lng: 0 })
     setModalOpen?.(false)
-    setShow(false)
   })
 
   return (
     <div>
-      <Button onClick={() => setShow(true)}>+</Button>
-      {show && (
+      <Button onClick={() => setModalOpen?.(true)}>+</Button>
+      {isOpen && (
         <ModalContainer>
           <StyledDiv ref={ref}>
             <FormSection>

@@ -116,6 +116,11 @@ const Forms = ({ newPoint, isModalOpen }: FormsProps) => {
                     name={field.field}
                     placeholder={field.label}
                     label={field.label}
+                    disabled={
+                      newPoint?.key &&
+                      (field.field === 'latitude' ||
+                        field.field === 'longitude')
+                    }
                   />
                   <ErrorMessage name={field.field} component={ErrorDiv} />
                 </FieldDiv>

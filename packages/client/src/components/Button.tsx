@@ -6,12 +6,12 @@ export const Button = styled.button`
   align-items: center;
   color: ${props => props.theme.colors.white};
   background-color: ${props => props.theme.colors.eclipse};
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 0.5rem 1rem;
   border: none;
   height: 56px;
   width: 56px;
-  border-radius: 5px;
+  border-radius: 50%;
   cursor: pointer;
   &:hover {
     background-color: ${props => props.theme.colors['grey-medium']};
