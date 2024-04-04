@@ -5,6 +5,7 @@
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 ![SonarQube](https://img.shields.io/badge/SonarQube-black?style=for-the-badge&logo=sonarqube&logoColor=4E9BCD)
 ![Postgres](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -55,6 +56,8 @@ To integrate Google Maps into React, the app utilizes the [visgl-react-google-ma
 3. Selects
 
 The application includes two types of select components, both based on [react-select](https://react-select.com). The first select component (searchBar) renders options as the user types into the input. The second select component includes pagination, loading new items as the user scrolls to the end until there are no more pages. Both select components are customized using a separate file and importing CSSObjectWithLabel, a type from react-select.
+
+## 📸 Homepage
 
 ![Homepage](https://github.com/WagnerNasc/prix-tour/assets/65175718/df4e95e7-3697-40f5-a457-7130f017b010)
 
