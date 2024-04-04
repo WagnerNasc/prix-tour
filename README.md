@@ -1,4 +1,4 @@
-# Prix Tour API
+# Prix Tour 
 
 [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://github.dev/WagnerNasc/prix-tour)
 
@@ -53,6 +53,8 @@ To integrate Google Maps into React, the app utilizes the [visgl-react-google-ma
 3. Selects
 
 The application includes two types of select components, both based on [react-select](https://react-select.com). The first select component (searchBar) renders options as the user types into the input. The second select component includes pagination, loading new items as the user scrolls to the end until there are no more pages. Both select components are customized using a separate file and importing CSSObjectWithLabel, a type from react-select.
+
+![Homepage](https://github.com/WagnerNasc/prix-tour/assets/65175718/df4e95e7-3697-40f5-a457-7130f017b010)
 
 ## 💨️ Running Project
 
