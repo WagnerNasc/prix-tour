@@ -1,22 +1,13 @@
 import { ITouristAttractionRepository } from '@repositories/interfaces/tourist-attraction-repository-interface'
 import { TouristAttraction } from '../interfaces/tourist-attraction-interface'
-
-export interface ListTouristAttractionsUseCaseRequest {
-  page: number
-  filter?: string
-  pageSize: number
-}
+import { Paginated } from '@use-cases/interfaces/paginated-interface'
 
 export class ListTouristAttractionsUseCase {
   constructor(
     private touristAttractionRepository: ITouristAttractionRepository,
   ) {}
 
-  public async execute({
-    page,
-    filter,
-    pageSize,
-  }: ListTouristAttractionsUseCaseRequest): Promise<{
+  public async execute({ page, filter, pageSize }: Paginated): Promise<{
     data: TouristAttraction[]
     total: number
   }> {

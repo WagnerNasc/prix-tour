@@ -2,6 +2,7 @@ import { Pool } from 'pg'
 import { City } from '../use-cases/interfaces/city-interface'
 import { ICityRepository } from './interfaces/city-repository-interface'
 import { Paginated } from '@use-cases/interfaces/paginated-interface'
+import { StateWithCity } from '@use-cases/interfaces/state-with-city-interface'
 
 export class CityRepository implements ICityRepository {
   private pool: Pool
@@ -39,7 +40,7 @@ export class CityRepository implements ICityRepository {
   }
 
   async findManyWithFilter({ page, filter, pageSize }: Paginated): Promise<{
-    data: City[]
+    data: StateWithCity[]
     total_list: number
     total_cities: number
     total_pages: number
@@ -47,28 +48,32 @@ export class CityRepository implements ICityRepository {
     try {
       let query = /* sql */ `
         SELECT
-          id,
-          name,
-          is_capital,
-          latitude,
-          longitude,
-          created_at
+          c.id,
+          c.name,
+          s.name AS state_name,
+          s.code AS state_code,
+          c.is_capital,
+          c.latitude,
+          c.longitude,
+          c.created_at
         FROM
-          city
-        WHERE deleted_at IS NULL
+          city c
+        JOIN
+          state s ON (c.state_id = s.id)
+        WHERE c.deleted_at IS NULL
       `
       // TODO: SQL Injection
       if (filter) {
         query += /* sql */ `
           AND
-            name ILIKE '%${filter}%'
+            c.name ILIKE '%${filter}%'
         `
       }
 
       const offset = (page - 1) * pageSize
 
       query += /* sql */ `
-        ORDER BY created_at DESC
+        ORDER BY c.created_at DESC
         LIMIT ${pageSize}
         OFFSET ${offset}
       `
@@ -94,7 +99,7 @@ export class CityRepository implements ICityRepository {
       const totalCities = parseInt(countTotalCities.rows[0].total_cities)
 
       const queryResult = await this.pool.query(query)
-      const cities: City[] = queryResult.rows
+      const cities: StateWithCity[] = queryResult.rows
 
       return {
         data: cities,

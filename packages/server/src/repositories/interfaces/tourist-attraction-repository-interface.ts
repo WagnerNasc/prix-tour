@@ -1,15 +1,11 @@
-import { ListTouristAttractionsUseCaseRequest } from '@use-cases/tourist-attraction/list-tourist-attractions.use-case'
 import { TouristAttraction } from '@use-cases/interfaces/tourist-attraction-interface'
 import { OmitProps } from '@helpers/omit'
 import { Optional } from '@helpers/optional'
+import { Paginated } from '@use-cases/interfaces/paginated-interface'
 
 export interface ITouristAttractionRepository {
   findById(id: string): Promise<{ data: TouristAttraction } | null>
-  findManyWithFilter({
-    page,
-    pageSize,
-    filter,
-  }: ListTouristAttractionsUseCaseRequest): Promise<{
+  findManyWithFilter({ page, pageSize, filter }: Paginated): Promise<{
     data: TouristAttraction[]
     total: number
   }>
