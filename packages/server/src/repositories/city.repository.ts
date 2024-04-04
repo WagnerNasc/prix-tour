@@ -2,7 +2,7 @@ import { Pool } from 'pg'
 import { City } from '../use-cases/interfaces/city-interface'
 import { ICityRepository } from './interfaces/city-repository-interface'
 import { Paginated } from '@use-cases/interfaces/paginated-interface'
-import { StateWithCity } from '@use-cases/interfaces/state-with-city-interface'
+import { StateCity } from '@use-cases/interfaces/state-city-interface'
 
 export class CityRepository implements ICityRepository {
   private pool: Pool
@@ -40,7 +40,7 @@ export class CityRepository implements ICityRepository {
   }
 
   async findManyWithFilter({ page, filter, pageSize }: Paginated): Promise<{
-    data: StateWithCity[]
+    data: StateCity[]
     total_list: number
     total_cities: number
     total_pages: number
@@ -99,7 +99,7 @@ export class CityRepository implements ICityRepository {
       const totalCities = parseInt(countTotalCities.rows[0].total_cities)
 
       const queryResult = await this.pool.query(query)
-      const cities: StateWithCity[] = queryResult.rows
+      const cities: StateCity[] = queryResult.rows
 
       return {
         data: cities,

@@ -1,6 +1,6 @@
 import { City } from './city-interface'
 
-export interface StateWithCity extends City {
+export interface StateCity extends City {
   stateName: string
   stateCode: string
 }
