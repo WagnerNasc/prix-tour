@@ -10,7 +10,7 @@
 
 This project aims to provide tourist spots data.
 
-## ⚡ Analyze Backend
+## 📊 Analyze Backend
 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=prix-tour-backend&metric=bugs)](https://sonarcloud.io/summary/new_code?id=prix-tour-backend)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=prix-tour-backend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=prix-tour-backend)
@@ -19,7 +19,7 @@ This project aims to provide tourist spots data.
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=prix-tour-backend&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=prix-tour-backend)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=prix-tour-backend&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=prix-tour-backend)
 
-## ⚡ Analyze Frontend
+## 📊 Analyze Frontend
 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=prix-tour-frontend&metric=bugs)](https://sonarcloud.io/summary/new_code?id=prix-tour-frontend)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=prix-tour-frontend&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=prix-tour-frontend)
@@ -56,7 +56,11 @@ The application includes two types of select components, both based on [react-se
 
 ![Homepage](https://github.com/WagnerNasc/prix-tour/assets/65175718/df4e95e7-3697-40f5-a457-7130f017b010)
 
-## 💨️ Running Project
+## 🎲 ERD (Entity Relationship Model)
+
+![prix-tour-db - diagram](https://github.com/WagnerNasc/prix-tour/assets/54827039/4c2d99ae-0b18-45ac-9ec2-cd3b91529a61)
+
+## ⚡ Running Project
 
 Before running the project, make sure you have the following requirements:
 
