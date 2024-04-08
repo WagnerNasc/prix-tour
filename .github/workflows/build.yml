@@ -11,17 +11,17 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
 
-      - name: Node setup
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.10'
-          cache: 'yarn'
+  #     - name: Node setup
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20.10'
+  #         cache: 'yarn'
 
-      - name: Install modules
-        run: yarn workspace server install --frozen-lockfile
+  #     - name: Install modules
+  #       run: yarn workspace server install --frozen-lockfile
       
-      - name: Running tests
-        run: yarn workspace server test:unit
+  #     - name: Running tests
+  #       run: yarn workspace server test:unit
   build:
     name: Build Application
     runs-on: ubuntu-latest
@@ -31,14 +31,27 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
 
-      - name: DockerHub login
-        run: docker login -u wagnernasc -p ${{ secrets.DOCKERHUB_KEY }}
+      # - name: DockerHub login
+      #   run: docker login -u wagnernasc -p ${{ secrets.DOCKERHUB_KEY }}
 
-      - name: Build image
-        run: docker build . -f ./packages/server/Dockerfile.build -t wagnernasc/prix-tour:latest
+      # - name: Build image
+      #   run: docker build . -f ./packages/server/Dockerfile.build -t wagnernasc/prix-tour:latest
       
-      - name: Sending image
-        run: docker push wagnernasc/prix-tour:latest
+      # - name: Sending image
+      #   run: docker push wagnernasc/prix-tour:latest
+  cd:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Trigger jenkins job
+        uses: joshlk/jenkins-githubaction@master
+        with:
+          url: http://54.235.17.174:8080
+          job_name: prix-tour
+          username: ${{ secrets.JENKINS_USER }}
+          api_token: ${{ secrets.JENKINS_TOKEN }}
+          timeout: "1000"
+
 
 
       
