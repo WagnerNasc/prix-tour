@@ -11,6 +11,8 @@ const envSchema = z.object({
   DATABASE_PASSWORD: z.string(),
   DATABASE_HOST: z.string(),
   DATABASE_URL: z.string(),
+  ANONYMIZATION_SECRET: z.string(),
+  ANONYMIZATION_NUMBER: z.coerce.number(),
 })
 
 const _env = envSchema.safeParse(process.env)
